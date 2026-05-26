@@ -5,6 +5,8 @@ services:
 
     container_name: inventory-postgres
 
+    restart: always
+
     environment:
       POSTGRES_DB: inventorydb
       POSTGRES_USER: postgres
