@@ -1,15 +1,59 @@
 package com.inventory.inventory.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.inventory.inventory.dto.ProductDTO;
+
+import com.inventory.inventory.service.ProductService;
+
+import jakarta.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
-    @GetMapping("/products")
-    public String products() {
+    @Autowired
+    private ProductService productService;
 
-        return "Protected products endpoint";
+    @GetMapping
+    public List<ProductDTO> getProducts() {
+
+        return productService.getAllProducts();
+    }
+
+    @PostMapping
+    public ProductDTO createProduct(
+            @Valid
+            @RequestBody ProductDTO dto
+    ) {
+
+        return productService.createProduct(dto);
+    }
+
+    @PutMapping("/{id}")
+    public ProductDTO updateProduct(
+            @PathVariable Long id,
+            @Valid
+            @RequestBody ProductDTO dto
+    ) {
+
+        return productService.updateProduct(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(
+            @PathVariable Long id
+    ) {
+
+        productService.deleteProduct(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
