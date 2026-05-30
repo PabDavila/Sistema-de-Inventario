@@ -1,6 +1,18 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
+
   application:
-    name: bff-gateway
+    name: auth-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/inventorydb
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
