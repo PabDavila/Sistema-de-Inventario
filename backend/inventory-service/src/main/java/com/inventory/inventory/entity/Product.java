@@ -1,5 +1,7 @@
 package com.inventory.inventory.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +18,10 @@ public class Product {
 
     private Double price;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
     public Product() {
     }
 
@@ -23,8 +29,7 @@ public class Product {
             Long id,
             String name,
             Integer stock,
-            Double price
-    ) {
+            Double price) {
 
         this.id = id;
         this.name = name;
@@ -62,6 +67,19 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @PrePersist
+    public void onCreate() {
+
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+
+        updatedAt = LocalDateTime.now();
     }
 
 }
