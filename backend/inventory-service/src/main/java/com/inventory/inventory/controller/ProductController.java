@@ -62,4 +62,10 @@ public class ProductController {
 
         return productService.searchProducts(name);
     }
+
+    @GetMapping("/admin-test")
+    public String adminTest() {
+
+        return "ADMIN ACCESS";
+    }
 }

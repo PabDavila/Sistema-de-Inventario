@@ -2,10 +2,7 @@ services:
 
   postgres:
     image: postgres:17
-
     container_name: inventory-postgres
-
-    restart: always
 
     environment:
       POSTGRES_DB: inventorydb
@@ -15,8 +12,39 @@ services:
     ports:
       - "5432:5432"
 
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+  auth-service:
+    build:
+      context: ../auth-service
 
-volumes:
-  postgres_data:
+    container_name: auth-service
+
+    ports:
+      - "8081:8081"
+
+    depends_on:
+      - postgres
+
+  inventory-service:
+    build:
+      context: ../inventory-service
+
+    container_name: inventory-service
+
+    ports:
+      - "8082:8082"
+
+    depends_on:
+      - postgres
+
+  bff-gateway:
+    build:
+      context: ../bff-gateway
+
+    container_name: bff-gateway
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - auth-service
+      - inventory-service
