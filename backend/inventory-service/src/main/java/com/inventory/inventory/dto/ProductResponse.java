@@ -7,7 +7,8 @@ public class ProductResponse {
     private String description;
     private Integer stock;
     private Double price;
-    private String category;
+    private Long categoryId;
+    private String categoryName;
 
     public Long getId() {
         return id;
@@ -49,11 +50,19 @@ public class ProductResponse {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

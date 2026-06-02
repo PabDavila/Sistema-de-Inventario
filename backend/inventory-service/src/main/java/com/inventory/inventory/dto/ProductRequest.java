@@ -21,8 +21,8 @@ public class ProductRequest {
     @Positive(message = "El precio debe ser mayor a cero")
     private Double price;
 
-    @NotBlank(message = "La categoría es obligatoria")
-    private String category;
+    @NotNull(message = "La categoría es obligatoria")
+    private Long categoryId;
 
     public String getName() {
         return name;
@@ -56,11 +56,11 @@ public class ProductRequest {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

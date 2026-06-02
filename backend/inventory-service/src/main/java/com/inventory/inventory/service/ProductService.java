@@ -1,6 +1,8 @@
 package com.inventory.inventory.service;
 
 import com.inventory.inventory.entity.Product;
+import com.inventory.inventory.entity.Category;
+import com.inventory.inventory.repository.CategoryRepository;
 import com.inventory.inventory.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     public List<Product> findAll() {
         return repository.findAll();
     }
@@ -22,23 +27,37 @@ public class ProductService {
         return repository.findById(id).orElse(null);
     }
 
-    public Product create(Product product) {
-        return repository.save(product);
-    }
+    public Product create(Product product, Long categoryId) {
 
-    public Product update(Long id, Product product) {
+    Category category = categoryRepository
+            .findById(categoryId)
+            .orElseThrow();
 
-        Product existing = repository.findById(id)
-                .orElseThrow();
+    product.setCategory(category);
 
-        existing.setName(product.getName());
-        existing.setDescription(product.getDescription());
-        existing.setStock(product.getStock());
-        existing.setPrice(product.getPrice());
-        existing.setCategory(product.getCategory());
+    return repository.save(product);
+}
 
-        return repository.save(existing);
-    }
+    public Product update(
+        Long id,
+        Product product,
+        Long categoryId) {
+
+    Product existing = repository.findById(id)
+            .orElseThrow();
+
+    Category category = categoryRepository
+            .findById(categoryId)
+            .orElseThrow();
+
+    existing.setName(product.getName());
+    existing.setDescription(product.getDescription());
+    existing.setStock(product.getStock());
+    existing.setPrice(product.getPrice());
+    existing.setCategory(category);
+
+    return repository.save(existing);
+}
 
     public void delete(Long id) {
         repository.deleteById(id);
@@ -47,4 +66,5 @@ public class ProductService {
     public List<Product> searchByName(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }
+
 }

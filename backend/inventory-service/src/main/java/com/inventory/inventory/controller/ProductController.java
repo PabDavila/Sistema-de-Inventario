@@ -45,7 +45,10 @@ public class ProductController {
 
         Product product = mapper.toEntity(request);
 
-        Product saved = service.create(product);
+        Product saved = service.create(
+        product,
+        request.getCategoryId()
+);
 
         return mapper.toResponse(saved);
     }
@@ -57,7 +60,11 @@ public class ProductController {
 
         Product product = mapper.toEntity(request);
 
-        Product updated = service.update(id, product);
+        Product updated = service.update(
+        id,
+        product,
+        request.getCategoryId()
+);
 
         return mapper.toResponse(updated);
     }

@@ -3,8 +3,8 @@ package com.inventory.inventory.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "categories")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,15 +14,7 @@ public class Product {
 
     private String description;
 
-    private Integer stock;
-
-    private Double price;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    public Product() {
+    public Category() {
     }
 
     public Long getId() {
@@ -47,29 +39,5 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }
