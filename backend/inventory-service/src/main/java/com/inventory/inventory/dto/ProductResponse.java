@@ -1,27 +1,13 @@
-package com.inventory.inventory.entity;
+package com.inventory.inventory.dto;
 
-import jakarta.persistence.*;
+public class ProductResponse {
 
-@Entity
-@Table(name = "products")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private String description;
-
     private Integer stock;
-
     private Double price;
-
     private String category;
-
-    public Product() {
-    }
 
     public Long getId() {
         return id;

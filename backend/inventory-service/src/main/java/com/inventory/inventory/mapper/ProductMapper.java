@@ -1,28 +1,38 @@
 package com.inventory.inventory.mapper;
 
-import com.inventory.inventory.dto.ProductDTO;
+import com.inventory.inventory.dto.ProductRequest;
+import com.inventory.inventory.dto.ProductResponse;
 import com.inventory.inventory.entity.Product;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProductMapper {
 
-    public static ProductDTO toDTO(Product product) {
+    public Product toEntity(ProductRequest dto) {
 
-        return new ProductDTO(
-                product.getId(),
-                product.getName(),
-                product.getStock(),
-                product.getPrice()
-        );
+        Product product = new Product();
+
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setStock(dto.getStock());
+        product.setPrice(dto.getPrice());
+        product.setCategory(dto.getCategory());
+
+        return product;
     }
 
-    public static Product toEntity(ProductDTO dto) {
+    public ProductResponse toResponse(Product product) {
 
-        return new Product(
-                dto.getId(),
-                dto.getName(),
-                dto.getStock(),
-                dto.getPrice()
-        );
+        ProductResponse dto = new ProductResponse();
+
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setDescription(product.getDescription());
+        dto.setStock(product.getStock());
+        dto.setPrice(product.getPrice());
+        dto.setCategory(product.getCategory());
+
+        return dto;
     }
-
-}
+}   

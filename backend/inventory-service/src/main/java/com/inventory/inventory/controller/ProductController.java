@@ -1,71 +1,80 @@
 package com.inventory.inventory.controller;
 
-import com.inventory.inventory.dto.ProductDTO;
+import com.inventory.inventory.dto.ProductRequest;
+import com.inventory.inventory.dto.ProductResponse;
+import com.inventory.inventory.entity.Product;
+import com.inventory.inventory.mapper.ProductMapper;
 import com.inventory.inventory.service.ProductService;
-import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    private ProductService service;
+
+    @Autowired
+    private ProductMapper mapper;
 
     @GetMapping
-    public Page<ProductDTO> getProducts(
-            Pageable pageable) {
+    public List<ProductResponse> getAll() {
 
-        return productService.getProducts(pageable);
-    }
-
-    @PostMapping
-    public ProductDTO createProduct(
-            @Valid @RequestBody ProductDTO dto) {
-
-        return productService.createProduct(dto);
-    }
-
-    @PutMapping("/{id}")
-    public ProductDTO updateProduct(
-            @PathVariable Long id,
-            @Valid @RequestBody ProductDTO dto) {
-
-        return productService.updateProduct(id, dto);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(
-            @PathVariable Long id) {
-
-        productService.deleteProduct(id);
-
-        return ResponseEntity.noContent().build();
+        return service.findAll()
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ProductDTO getProductById(
-            @PathVariable Long id) {
+    public ProductResponse getById(@PathVariable Long id) {
 
-        return productService.getProductById(id);
+        Product product = service.findById(id);
+
+        return mapper.toResponse(product);
+    }
+
+    @PostMapping
+    public ProductResponse create(
+            @Valid @RequestBody ProductRequest request) {
+
+        Product product = mapper.toEntity(request);
+
+        Product saved = service.create(product);
+
+        return mapper.toResponse(saved);
+    }
+
+    @PutMapping("/{id}")
+    public ProductResponse update(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductRequest request) {
+
+        Product product = mapper.toEntity(request);
+
+        Product updated = service.update(id, product);
+
+        return mapper.toResponse(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+
+        service.delete(id);
     }
 
     @GetMapping("/search")
-    public List<ProductDTO> searchProducts(
+    public List<ProductResponse> search(
             @RequestParam String name) {
 
-        return productService.searchProducts(name);
-    }
-
-    @GetMapping("/admin-test")
-    public String adminTest() {
-
-        return "ADMIN ACCESS";
+        return service.searchByName(name)
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
     }
 }
