@@ -98,7 +98,8 @@ public class JwtAuthenticationFilter
                         exchange.getResponse()
                                         .setStatusCode(HttpStatus.FORBIDDEN);
 
-                        return exchange.getResponse().setComplete();
+                        return exchange.getResponse()
+                                        .setComplete();
                 }
 
                 return chain.filter(exchange);

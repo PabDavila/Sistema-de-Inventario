@@ -14,7 +14,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
+
+@Tag(name = "Movimientos", description = "Kardex e historial de movimientos de inventario")
 
 @RestController
 @RequestMapping("/movements")
@@ -26,19 +31,21 @@ public class InventoryMovementController {
     @Autowired
     private InventoryMovementMapper mapper;
 
+    @Operation(summary = "Registrar movimiento", description = "Registra una entrada o salida de inventario y actualiza el stock")
+
     @PostMapping
     public MovementResponse registerMovement(
-            @Valid
-            @RequestBody MovementRequest request) {
+            @Valid @RequestBody MovementRequest request) {
 
-        InventoryMovement movement =
-                service.registerMovement(
-                        request.getProductId(),
-                        request.getType(),
-                        request.getQuantity());
+        InventoryMovement movement = service.registerMovement(
+                request.getProductId(),
+                request.getType(),
+                request.getQuantity());
 
         return mapper.toResponse(movement);
     }
+
+    @Operation(summary = "Listar movimientos", description = "Obtiene todos los movimientos de inventario registrados")
 
     @GetMapping
     public List<MovementResponse> getAll() {
@@ -48,6 +55,8 @@ public class InventoryMovementController {
                 .map(mapper::toResponse)
                 .toList();
     }
+
+    @Operation(summary = "Movimientos por producto", description = "Obtiene el historial de movimientos de un producto específico")
 
     @GetMapping("/product/{productId}")
     public List<MovementResponse> getByProduct(

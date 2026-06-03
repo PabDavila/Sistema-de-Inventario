@@ -5,6 +5,8 @@ import com.inventory.inventory.entity.Product;
 
 import com.inventory.inventory.repository.InventoryMovementRepository;
 import com.inventory.inventory.repository.ProductRepository;
+import com.inventory.inventory.exception.ResourceNotFoundException;
+import com.inventory.inventory.exception.InsufficientStockException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,12 +29,14 @@ public class InventoryMovementService {
 
         Product product = productRepository
                 .findById(productId)
-                .orElseThrow();
+                .orElseThrow(() ->
+                new ResourceNotFoundException(
+                        "Producto no encontrado"));
 
         if ("OUT".equalsIgnoreCase(type)) {
 
             if (product.getStock() < quantity) {
-                throw new RuntimeException(
+                throw new InsufficientStockException(
                         "Stock insuficiente");
             }
 

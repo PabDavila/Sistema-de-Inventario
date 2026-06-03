@@ -4,6 +4,7 @@ import com.inventory.inventory.entity.Product;
 import com.inventory.inventory.entity.Category;
 import com.inventory.inventory.repository.CategoryRepository;
 import com.inventory.inventory.repository.ProductRepository;
+import com.inventory.inventory.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,9 @@ public class ProductService {
 
     Category category = categoryRepository
             .findById(categoryId)
-            .orElseThrow();
+            .orElseThrow(() ->
+                new ResourceNotFoundException(
+                        "Producto no encontrado"));
 
     product.setCategory(category);
 
@@ -44,11 +47,15 @@ public class ProductService {
         Long categoryId) {
 
     Product existing = repository.findById(id)
-            .orElseThrow();
+            .orElseThrow(() ->
+                new ResourceNotFoundException(
+                        "Producto no encontrado"));
 
     Category category = categoryRepository
             .findById(categoryId)
-            .orElseThrow();
+            .orElseThrow(() ->
+                new ResourceNotFoundException(
+                        "Producto no encontrado"));
 
     existing.setName(product.getName());
     existing.setDescription(product.getDescription());
