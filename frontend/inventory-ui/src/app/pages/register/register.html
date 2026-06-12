@@ -1,0 +1,53 @@
+<h2>Registro</h2>
+
+<form (ngSubmit)="register()">
+
+  <div>
+    <label>Usuario</label>
+
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="username">
+  </div>
+
+  <br>
+
+  <div>
+    <label>Contraseña</label>
+
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password">
+  </div>
+
+  <br>
+
+  <div>
+
+    <label>Rol</label>
+
+    <select
+      name="role"
+      [(ngModel)]="role">
+
+      <option value="ROLE_EMPLOYEE">
+        Empleado
+      </option>
+
+      <option value="ROLE_ADMIN">
+        Administrador
+      </option>
+
+    </select>
+
+  </div>
+
+  <br>
+
+  <button type="submit">
+    Registrar
+  </button>
+
+</form>

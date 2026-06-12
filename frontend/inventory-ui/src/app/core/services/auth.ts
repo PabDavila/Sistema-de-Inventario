@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { LoginRequest } from '../../models/login-request';
 import { LoginResponse } from '../../models/login-response';
+import { RegisterRequest } from '../../models/register-request';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   login(
     request: LoginRequest
@@ -56,5 +57,19 @@ export class AuthService {
   isAuthenticated(): boolean {
 
     return this.getToken() !== null;
+  }
+
+  register(
+    request: RegisterRequest
+  ) {
+
+    return this.http.post(
+      `${this.API_URL}/register`,
+      request,
+      {
+        responseType: 'text'
+      }
+    );
+
   }
 }
