@@ -1,5 +1,57 @@
 <h2>Administración de Usuarios</h2>
 
-<p>
-  Aquí se crearán y administrarán las cuentas.
-</p>
+<form (ngSubmit)="createUser()">
+
+  <div>
+
+    <label>Usuario</label>
+
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="username">
+
+  </div>
+
+  <br>
+
+  <div>
+
+    <label>Contraseña</label>
+
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password">
+
+  </div>
+
+  <br>
+
+  <div>
+
+    <label>Rol</label>
+
+    <select
+      name="role"
+      [(ngModel)]="role">
+
+      <option value="ROLE_EMPLOYEE">
+        Empleado
+      </option>
+
+      <option value="ROLE_ADMIN">
+        Administrador
+      </option>
+
+    </select>
+
+  </div>
+
+  <br>
+
+  <button type="submit">
+    Crear Usuario
+  </button>
+
+</form>

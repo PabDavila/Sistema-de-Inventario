@@ -1,1 +1,42 @@
-<p>movements works!</p>
+<h2>Movimientos</h2>
+
+<table border="1">
+
+  <thead>
+
+    <tr>
+
+      <th>ID</th>
+
+      <th>Producto</th>
+
+      <th>Tipo</th>
+
+      <th>Cantidad</th>
+
+      <th>Fecha</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr
+      *ngFor="let movement of movements">
+
+      <td>{{ movement.id }}</td>
+
+      <td>{{ movement.productId }}</td>
+
+      <td>{{ movement.type }}</td>
+
+      <td>{{ movement.quantity }}</td>
+
+      <td>{{ movement.movementDate }}</td>
+
+    </tr>
+
+  </tbody>
+
+</table>
