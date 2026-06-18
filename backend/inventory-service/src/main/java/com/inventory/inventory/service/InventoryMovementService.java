@@ -2,9 +2,11 @@ package com.inventory.inventory.service;
 
 import com.inventory.inventory.entity.InventoryMovement;
 import com.inventory.inventory.entity.Product;
+import com.inventory.inventory.entity.MovementType;
 
 import com.inventory.inventory.repository.InventoryMovementRepository;
 import com.inventory.inventory.repository.ProductRepository;
+
 import com.inventory.inventory.exception.ResourceNotFoundException;
 import com.inventory.inventory.exception.InsufficientStockException;
 
@@ -25,28 +27,40 @@ public class InventoryMovementService {
     public InventoryMovement registerMovement(
             Long productId,
             String type,
-            Integer quantity) {
+            Integer quantity
+    ) {
 
         Product product = productRepository
                 .findById(productId)
                 .orElseThrow(() ->
-                new ResourceNotFoundException(
-                        "Producto no encontrado"));
+                        new ResourceNotFoundException(
+                                "Producto no encontrado"
+                        )
+                );
 
-        if ("OUT".equalsIgnoreCase(type)) {
+        MovementType movementType =
+                MovementType.valueOf(
+                        type.toUpperCase()
+                );
+
+        if (movementType == MovementType.EXIT) {
 
             if (product.getStock() < quantity) {
+
                 throw new InsufficientStockException(
-                        "Stock insuficiente");
+                        "Stock insuficiente"
+                );
             }
 
             product.setStock(
-                    product.getStock() - quantity);
+                    product.getStock() - quantity
+            );
 
         } else {
 
             product.setStock(
-                    product.getStock() + quantity);
+                    product.getStock() + quantity
+            );
         }
 
         productRepository.save(product);
@@ -55,20 +69,31 @@ public class InventoryMovementService {
                 new InventoryMovement();
 
         movement.setProduct(product);
-        movement.setType(type);
-        movement.setQuantity(quantity);
 
-        return movementRepository.save(movement);
+        movement.setType(
+                movementType
+        );
+
+        movement.setQuantity(
+                quantity
+        );
+
+        return movementRepository.save(
+                movement
+        );
     }
 
     public List<InventoryMovement> findAll() {
+
         return movementRepository.findAll();
     }
 
     public List<InventoryMovement> findByProduct(
-            Long productId) {
+            Long productId
+    ) {
 
-        return movementRepository
-                .findByProductId(productId);
+        return movementRepository.findByProductId(
+                productId
+        );
     }
 }
