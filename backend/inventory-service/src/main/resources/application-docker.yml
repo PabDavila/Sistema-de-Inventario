@@ -1,0 +1,21 @@
+server:
+  port: 8082
+
+spring:
+
+  application:
+    name: inventory-service
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/inventorydb
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+
+  jackson:
+    time-zone: America/Santiago
