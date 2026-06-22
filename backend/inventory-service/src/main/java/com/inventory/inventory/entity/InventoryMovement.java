@@ -29,6 +29,10 @@ public class InventoryMovement {
 
     }
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     public Long getId() {
 
         return id;
@@ -88,6 +92,14 @@ public class InventoryMovement {
 
         this.product = product;
 
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
 }
