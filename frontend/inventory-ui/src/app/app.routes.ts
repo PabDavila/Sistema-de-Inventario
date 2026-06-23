@@ -6,6 +6,9 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { Products } from './pages/products/products';
 import { Categories } from './pages/categories/categories';
 import { Movements } from './pages/movements/movements';
+import { ClientList } from './pages/clients/client-list/client-list';
+import { ClientForm } from './pages/clients/client-form/client-form';
+
 
 import { authGuard } from './core/guards/auth-guard';
 
@@ -23,7 +26,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'users',
+    path: 'usuarios',
     component: Users,
     canActivate: [authGuard]
   },
@@ -35,20 +38,32 @@ export const routes: Routes = [
   },
 
   {
-    path: 'products',
+    path: 'productos',
     component: Products,
     canActivate: [authGuard]
   },
 
   {
-    path: 'categories',
+    path: 'categorias',
     component: Categories,
     canActivate: [authGuard]
   },
 
   {
-    path: 'movements',
+    path: 'movimientos',
     component: Movements,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'clientes',
+    component: ClientList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'clientes/nuevo',
+    component: ClientForm,
     canActivate: [authGuard]
   },
 
