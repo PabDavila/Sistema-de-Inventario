@@ -49,10 +49,14 @@ export class AuthService {
 
   logout(): void {
 
-    localStorage.removeItem(
-      this.TOKEN_KEY
-    );
-  }
+  localStorage.removeItem(
+    'token'
+  );
+
+  localStorage.removeItem(
+    'user_role'
+  );
+}
 
   isAuthenticated(): boolean {
 
@@ -71,5 +75,20 @@ export class AuthService {
       }
     );
 
+  }
+
+  saveRole(role: string): void {
+
+    localStorage.setItem(
+      'user_role',
+      role
+    );
+  }
+
+  getRole(): string | null {
+
+    return localStorage.getItem(
+      'user_role'
+    );
   }
 }

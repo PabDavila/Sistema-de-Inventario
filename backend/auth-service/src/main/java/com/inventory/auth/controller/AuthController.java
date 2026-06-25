@@ -6,6 +6,8 @@ import com.inventory.auth.dto.RegisterRequest;
 
 import com.inventory.auth.service.AuthService;
 
+import com.inventory.auth.entity.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -16,40 +18,33 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+        @Autowired
+        private AuthService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(
-            @RequestBody RegisterRequest request
-    ) {
+        @PostMapping("/register")
+        public ResponseEntity<String> register(
+                        @RequestBody RegisterRequest request) {
 
-        authService.register(request);
+                authService.register(request);
 
-        return ResponseEntity.ok("User created");
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(
-            @RequestBody LoginRequest request
-    ) {
-
-        String token =
-                authService.login(
-                        request.getUsername(),
-                        request.getPassword()
-                );
-
-        if (token == null) {
-
-            return ResponseEntity
-                    .badRequest()
-                    .body("Invalid credentials");
+                return ResponseEntity.ok("User created");
         }
 
-        return ResponseEntity.ok(
-                new LoginResponse(token)
-        );
-    }
+        @PostMapping("/login")
+        public ResponseEntity<?> login(
+                        @RequestBody LoginRequest request) {
+
+                String token = authService.login(
+                                request.getUsername(),
+                                request.getPassword());
+
+                User user = authService.findByUsername(
+                                request.getUsername());
+
+                return ResponseEntity.ok(
+                                new LoginResponse(
+                                                token,
+                                                user.getRole().name()));
+        }
 
 }

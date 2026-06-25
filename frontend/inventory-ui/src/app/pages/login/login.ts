@@ -18,7 +18,7 @@ export class Login {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   login(): void {
 
@@ -33,6 +33,10 @@ export class Login {
 
         this.authService.saveToken(
           response.token
+        );
+
+        this.authService.saveRole(
+          response.role
         );
 
         this.router.navigate([

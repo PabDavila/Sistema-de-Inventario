@@ -8,6 +8,7 @@ import { Categories } from './pages/categories/categories';
 import { Movements } from './pages/movements/movements';
 import { ClientList } from './pages/clients/client-list/client-list';
 import { ClientForm } from './pages/clients/client-form/client-form';
+import { adminGuard } from './core/guards/admin-guard';
 
 
 import { authGuard } from './core/guards/auth-guard';
@@ -65,6 +66,12 @@ export const routes: Routes = [
     path: 'clientes/nuevo',
     component: ClientForm,
     canActivate: [authGuard]
+  },
+
+  {
+    path: 'clients',
+    component: ClientList,
+    canActivate: [adminGuard]
   },
 
   {
