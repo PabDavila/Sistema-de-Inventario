@@ -12,7 +12,7 @@ import { Product } from '../../models/product';
 export class ProductService {
 
   private readonly API_URL =
-    'http://localhost:8082/products';
+  'http://localhost:8080/products';
 
   constructor(
     private http: HttpClient

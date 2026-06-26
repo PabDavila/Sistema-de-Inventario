@@ -12,7 +12,7 @@ import { Category } from '../../models/category';
 export class CategoryService {
 
   private readonly API_URL =
-    'http://localhost:8082/categories';
+    'http://localhost:8080/categories';
 
   constructor(
     private http: HttpClient

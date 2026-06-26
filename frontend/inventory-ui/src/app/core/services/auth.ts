@@ -16,7 +16,7 @@ export class AuthService {
   private readonly TOKEN_KEY = 'jwt_token';
 
   private readonly API_URL =
-    'http://localhost:8081/auth';
+    'http://localhost:8080/auth';
 
   constructor(
     private http: HttpClient
