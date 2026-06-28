@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import {
-  HttpClient
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import {
-  Observable
-} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Client } from '../../models/client';
 
@@ -15,7 +11,7 @@ import { Client } from '../../models/client';
 })
 export class ClientService {
 
-  private apiUrl =
+  private readonly API_URL =
     'http://localhost:8080/clients';
 
   constructor(
@@ -25,7 +21,7 @@ export class ClientService {
   getAll(): Observable<Client[]> {
 
     return this.http.get<Client[]>(
-      this.apiUrl
+      this.API_URL
     );
   }
 
@@ -34,7 +30,7 @@ export class ClientService {
   ): Observable<Client> {
 
     return this.http.get<Client>(
-      `${this.apiUrl}/${id}`
+      `${this.API_URL}/${id}`
     );
   }
 
@@ -43,7 +39,7 @@ export class ClientService {
   ): Observable<Client> {
 
     return this.http.post<Client>(
-      this.apiUrl,
+      this.API_URL,
       client
     );
   }
@@ -54,7 +50,7 @@ export class ClientService {
   ): Observable<Client> {
 
     return this.http.put<Client>(
-      `${this.apiUrl}/${id}`,
+      `${this.API_URL}/${id}`,
       client
     );
   }
@@ -64,7 +60,7 @@ export class ClientService {
   ): Observable<void> {
 
     return this.http.delete<void>(
-      `${this.apiUrl}/${id}`
+      `${this.API_URL}/${id}`
     );
   }
 }

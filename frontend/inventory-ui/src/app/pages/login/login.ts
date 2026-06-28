@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/services/auth';
@@ -13,18 +15,20 @@ import { AuthService } from '../../core/services/auth';
 export class Login {
 
   username = '';
+
   password = '';
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   login(): void {
 
     this.authService.login({
 
       username: this.username,
+
       password: this.password
 
     }).subscribe({
@@ -47,7 +51,7 @@ export class Login {
       error: () => {
 
         alert(
-          'Usuario o contraseña incorrectos'
+          'Credenciales incorrectas'
         );
       }
     });

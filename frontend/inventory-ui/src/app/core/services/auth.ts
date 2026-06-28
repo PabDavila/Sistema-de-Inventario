@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-
-import { LoginRequest } from '../../models/login-request';
 import { LoginResponse } from '../../models/login-response';
 import { RegisterRequest } from '../../models/register-request';
 
@@ -15,20 +12,33 @@ export class AuthService {
 
   private readonly TOKEN_KEY = 'jwt_token';
 
+  private readonly ROLE_KEY = 'user_role';
+
   private readonly API_URL =
     'http://localhost:8080/auth';
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
-  login(
-    request: LoginRequest
-  ): Observable<LoginResponse> {
+  login(credentials: any) {
 
     return this.http.post<LoginResponse>(
       `${this.API_URL}/login`,
-      request
+      credentials
+    );
+  }
+
+  register(
+    request: RegisterRequest
+  ) {
+
+    return this.http.post(
+      `${this.API_URL}/register`,
+      request,
+      {
+        responseType: 'text'
+      }
     );
   }
 
@@ -47,40 +57,10 @@ export class AuthService {
     );
   }
 
-  logout(): void {
-
-  localStorage.removeItem(
-    'token'
-  );
-
-  localStorage.removeItem(
-    'user_role'
-  );
-}
-
-  isAuthenticated(): boolean {
-
-    return this.getToken() !== null;
-  }
-
-  register(
-    request: RegisterRequest
-  ) {
-
-    return this.http.post(
-      `${this.API_URL}/register`,
-      request,
-      {
-        responseType: 'text'
-      }
-    );
-
-  }
-
   saveRole(role: string): void {
 
     localStorage.setItem(
-      'user_role',
+      this.ROLE_KEY,
       role
     );
   }
@@ -88,7 +68,23 @@ export class AuthService {
   getRole(): string | null {
 
     return localStorage.getItem(
-      'user_role'
+      this.ROLE_KEY
     );
+  }
+
+  logout(): void {
+
+    localStorage.removeItem(
+      this.TOKEN_KEY
+    );
+
+    localStorage.removeItem(
+      this.ROLE_KEY
+    );
+  }
+
+  isAuthenticated(): boolean {
+
+    return this.getToken() !== null;
   }
 }

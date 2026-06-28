@@ -29,7 +29,7 @@ export const routes: Routes = [
   {
     path: 'usuarios',
     component: Users,
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
 
   {
@@ -66,12 +66,6 @@ export const routes: Routes = [
     path: 'clientes/nuevo',
     component: ClientForm,
     canActivate: [authGuard]
-  },
-
-  {
-    path: 'clients',
-    component: ClientList,
-    canActivate: [adminGuard]
   },
 
   {
