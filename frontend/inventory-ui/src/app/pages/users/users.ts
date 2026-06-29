@@ -16,7 +16,7 @@ export class Users {
 
   password = '';
 
-  role = 'ROLE_EMPLOYEE';
+  role = 'ROLE_OPERATOR';
 
   constructor(
     private authService: AuthService
@@ -41,10 +41,11 @@ export class Users {
         );
 
         this.username = '';
+
         this.password = '';
 
         this.role =
-          'ROLE_EMPLOYEE';
+          'ROLE_OPERATOR';
       },
 
       error: (err) => {

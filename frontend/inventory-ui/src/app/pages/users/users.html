@@ -6,10 +6,7 @@
 
     <label>Usuario</label>
 
-    <input
-      type="text"
-      name="username"
-      [(ngModel)]="username">
+    <input type="text" name="username" [(ngModel)]="username">
 
   </div>
 
@@ -19,10 +16,7 @@
 
     <label>Contraseña</label>
 
-    <input
-      type="password"
-      name="password"
-      [(ngModel)]="password">
+    <input type="password" name="password" [(ngModel)]="password">
 
   </div>
 
@@ -32,12 +26,14 @@
 
     <label>Rol</label>
 
-    <select
-      name="role"
-      [(ngModel)]="role">
+    <select name="role" [(ngModel)]="role">
 
-      <option value="ROLE_EMPLOYEE">
-        Empleado
+      <option value="ROLE_OPERATOR">
+        Operador
+      </option>
+
+      <option value="ROLE_DELIVERY">
+        Repartidor
       </option>
 
       <option value="ROLE_ADMIN">

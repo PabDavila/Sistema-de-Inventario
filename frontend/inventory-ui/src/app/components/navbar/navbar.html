@@ -1,0 +1,43 @@
+<nav class="navbar">
+
+  <a routerLink="/dashboard">
+    Dashboard
+  </a>
+
+  <a *ngIf="isAdmin() || isOperator()" routerLink="/productos">
+
+    Productos
+
+  </a>
+
+  <a *ngIf="isAdmin() || isOperator()" routerLink="/categorias">
+
+    Categorías
+
+  </a>
+
+  <a *ngIf="isAdmin() || isOperator() || isDelivery()" routerLink="/movimientos">
+
+    Movimientos
+
+  </a>
+
+  <a *ngIf="isAdmin() || isDelivery()" routerLink="/clientes">
+
+    Clientes
+
+  </a>
+
+  <a *ngIf="role === 'ROLE_ADMIN'" routerLink="/usuarios">
+    Usuarios
+  </a>
+
+  <span class="role">
+    ROLE DETECTADO: {{ role }}
+  </span>
+
+  <button (click)="logout()">
+    Cerrar Sesión
+  </button>
+
+</nav>

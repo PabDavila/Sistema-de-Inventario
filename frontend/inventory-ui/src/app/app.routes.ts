@@ -9,6 +9,7 @@ import { Movements } from './pages/movements/movements';
 import { ClientList } from './pages/clients/client-list/client-list';
 import { ClientForm } from './pages/clients/client-form/client-form';
 import { adminGuard } from './core/guards/admin-guard';
+import { roleGuard } from './core/guards/role-guard';
 
 
 import { authGuard } from './core/guards/auth-guard';
@@ -29,7 +30,10 @@ export const routes: Routes = [
   {
     path: 'usuarios',
     component: Users,
-    canActivate: [adminGuard]
+    canActivate: [
+      authGuard,
+      roleGuard(['ROLE_ADMIN'])
+    ]
   },
 
   {
@@ -41,31 +45,62 @@ export const routes: Routes = [
   {
     path: 'productos',
     component: Products,
-    canActivate: [authGuard]
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR'
+      ])
+    ]
   },
 
   {
     path: 'categorias',
     component: Categories,
-    canActivate: [authGuard]
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR'
+      ])
+    ]
   },
 
   {
     path: 'movimientos',
     component: Movements,
-    canActivate: [authGuard]
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR',
+        'ROLE_DELIVERY'
+      ])
+    ]
   },
 
   {
     path: 'clientes',
     component: ClientList,
-    canActivate: [authGuard]
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_DELIVERY'
+      ])
+    ]
   },
 
   {
     path: 'clientes/nuevo',
     component: ClientForm,
-    canActivate: [authGuard]
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_DELIVERY'
+      ])
+    ]
   },
 
   {
