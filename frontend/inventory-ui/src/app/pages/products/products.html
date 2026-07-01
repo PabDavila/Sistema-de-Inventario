@@ -1,5 +1,9 @@
 <h2>Productos</h2>
 
+<button routerLink="/productos/nuevo">
+  Nuevo Producto
+</button>
+
 <table border="1">
 
   <thead>
@@ -7,14 +11,11 @@
     <tr>
 
       <th>ID</th>
-
       <th>Nombre</th>
-
       <th>Descripción</th>
-
       <th>Stock</th>
-
       <th>Precio</th>
+      <th>Acciones</th>
 
     </tr>
 
@@ -22,18 +23,32 @@
 
   <tbody>
 
-    <tr
-      *ngFor="let product of products">
+    <tr *ngFor="let product of products">
 
       <td>{{ product.id }}</td>
-
       <td>{{ product.name }}</td>
-
       <td>{{ product.description }}</td>
-
       <td>{{ product.stock }}</td>
-
       <td>{{ product.price }}</td>
+
+      <td>
+
+        <button [routerLink]="[
+      '/productos/editar',
+      product.id
+    ]">
+
+          Editar
+
+        </button>
+
+        <button (click)="deleteProduct(product.id!)">
+
+          Eliminar
+
+        </button>
+
+      </td>
 
     </tr>
 

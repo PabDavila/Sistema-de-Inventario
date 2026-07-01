@@ -13,21 +13,24 @@ public class RoleAuthorizationFilter {
             String method
     ) {
 
-        if (role.equals("ROLE_ADMIN")) {
+        if ("ROLE_ADMIN".equals(role)) {
             return true;
         }
 
-        if (role.equals("ROLE_EMPLOYEE")) {
+        if ("ROLE_OPERATOR".equals(role)) {
 
-            if (
-                    method.equals(HttpMethod.GET.name())
-            ) {
+            if (method.equals(HttpMethod.GET.name())) {
+                return true;
+            }
+        }
 
+        if ("ROLE_DELIVERY".equals(role)) {
+
+            if (method.equals(HttpMethod.GET.name())) {
                 return true;
             }
         }
 
         return false;
     }
-
 }

@@ -9,20 +9,22 @@ import { Product } from '../../models/product';
 
 import { ProductService } from '../../core/services/product';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-products',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products.html',
   styleUrl: './products.css'
 })
 export class Products
-implements OnInit {
+  implements OnInit {
 
   products: Product[] = [];
 
   constructor(
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -43,6 +45,38 @@ implements OnInit {
         error: (err) => {
 
           console.error(err);
+        }
+      });
+  }
+
+  deleteProduct(
+    id: number
+  ): void {
+
+    if (
+      !confirm(
+        '¿Eliminar producto?'
+      )
+    ) {
+      return;
+    }
+
+    this.productService
+      .delete(id)
+      .subscribe({
+
+        next: () => {
+
+          this.loadProducts();
+        },
+
+        error: (err) => {
+
+          console.error(err);
+
+          alert(
+            'Error al eliminar producto'
+          );
         }
       });
   }

@@ -1,0 +1,52 @@
+<h2>
+
+  {{ productId ? 'Editar Producto' : 'Nuevo Producto' }}
+
+</h2>
+
+<form
+  [formGroup]="form"
+  (ngSubmit)="save()">
+
+  <input
+    formControlName="name"
+    placeholder="Nombre" id="">
+
+  <input
+    formControlName="description"
+    placeholder="Descripción" id="">
+
+  <input
+    type="number"
+    formControlName="stock"
+    placeholder="Stock" id="">
+
+  <input
+    type="number"
+    formControlName="price"
+    placeholder="Precio" id="">
+
+  <select
+    formControlName="categoryId" id="">
+
+    <option value="">
+      Seleccione categoría
+    </option>
+
+    <option
+      *ngFor="let category of categories"
+      [value]="category.id">
+
+      {{ category.name }}
+
+    </option>
+
+  </select>
+
+  <button type="submit">
+
+    Guardar
+
+  </button>
+
+</form>

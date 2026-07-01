@@ -1,5 +1,11 @@
 <h2>Movimientos</h2>
 
+<button routerLink="/movimientos/nuevo">
+
+  Nuevo Movimiento
+
+</button>
+
 <table border="1">
 
   <thead>
@@ -14,7 +20,11 @@
 
       <th>Cantidad</th>
 
+      <th>Estado</th>
+
       <th>Fecha</th>
+
+      <th>Acciones</th>
 
     </tr>
 
@@ -22,18 +32,32 @@
 
   <tbody>
 
-    <tr
-      *ngFor="let movement of movements">
+    <tr *ngFor="let movement of movements">
 
       <td>{{ movement.id }}</td>
 
-      <td>{{ movement.productId }}</td>
+      <td>{{ movement.productName }}</td>
 
       <td>{{ movement.type }}</td>
 
       <td>{{ movement.quantity }}</td>
 
+      <td>{{ movement.status }}</td>
+
       <td>{{ movement.movementDate }}</td>
+
+      <td>
+
+        <button [routerLink]="[
+      '/movimientos/editar',
+      movement.id
+    ]">
+
+          Editar
+
+        </button>
+
+      </td>
 
     </tr>
 

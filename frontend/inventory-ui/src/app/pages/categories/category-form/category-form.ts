@@ -11,35 +11,34 @@ import {
 } from '@angular/forms';
 
 import {
-  Router,
-  ActivatedRoute
+  ActivatedRoute,
+  Router
 } from '@angular/router';
 
 import {
-  ClientService
-} from '../../../core/services/client';
+  CategoryService
+} from '../../../core/services/category';
 
 @Component({
-  selector: 'app-client-form',
+  selector: 'app-category-form',
   standalone: true,
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './client-form.html'
+  templateUrl: './category-form.html'
 })
-export class ClientForm implements OnInit {
+export class CategoryForm
+implements OnInit {
 
   form: FormGroup;
 
-  isEditMode = false;
-
-  clientId = 0;
+  categoryId?: number;
 
   constructor(
     private fb: FormBuilder,
-    private service: ClientService,
-    private router: Router,
-    private route: ActivatedRoute
+    private service: CategoryService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
     this.form = this.fb.group({
@@ -49,12 +48,7 @@ export class ClientForm implements OnInit {
         Validators.required
       ],
 
-      email: [
-        '',
-        Validators.required
-      ],
-
-      phone: [
+      description: [
         '',
         Validators.required
       ]
@@ -68,38 +62,39 @@ export class ClientForm implements OnInit {
 
     if (id) {
 
-      this.isEditMode = true;
+      this.categoryId = +id;
 
-      this.clientId = +id;
-
-      this.service
-        .getById(this.clientId)
-        .subscribe(client => {
-
-          this.form.patchValue(client);
-        });
+      this.loadCategory();
     }
+  }
+
+  loadCategory(): void {
+
+    this.service
+      .getById(this.categoryId!)
+      .subscribe(category => {
+
+        this.form.patchValue(category);
+      });
   }
 
   save(): void {
 
-    if (
-      this.form.invalid
-    ) {
+    if (this.form.invalid) {
       return;
     }
 
-    if (this.isEditMode) {
+    if (this.categoryId) {
 
       this.service
         .update(
-          this.clientId,
+          this.categoryId,
           this.form.value
         )
         .subscribe(() => {
 
           this.router.navigate([
-            '/clientes'
+            '/categorias'
           ]);
         });
 
@@ -112,7 +107,7 @@ export class ClientForm implements OnInit {
         .subscribe(() => {
 
           this.router.navigate([
-            '/clientes'
+            '/categorias'
           ]);
         });
     }

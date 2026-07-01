@@ -1,0 +1,86 @@
+<h2>
+  {{ isEdit ? 'Actualizar Estado' : 'Nuevo Movimiento' }}
+</h2>
+
+<form
+  [formGroup]="form"
+  (ngSubmit)="save()">
+
+  <!-- CREAR MOVIMIENTO -->
+
+  <div *ngIf="!isEdit">
+
+    <select
+      formControlName="productId" id="">
+
+      <option value="">
+        Seleccione producto
+      </option>
+
+      <option
+        *ngFor="let product of products"
+        [value]="product.id">
+
+        {{ product.name }}
+
+      </option>
+
+    </select>
+
+    <select
+      formControlName="type" id="">
+
+      <option value="ENTRY">
+        Entrada
+      </option>
+
+      <option value="EXIT">
+        Salida
+      </option>
+
+    </select>
+
+    <input
+      type="number"
+      formControlName="quantity" id="">
+
+  </div>
+
+  <!-- EDITAR ESTADO -->
+
+  <div *ngIf="isEdit">
+
+    <label>
+      Estado
+    </label>
+
+    <select
+      formControlName="status" id="">
+
+      <option value="PENDING">
+        Pendiente
+      </option>
+
+      <option value="APPROVED">
+        Aprobado
+      </option>
+
+      <option value="DELIVERED">
+        Entregado
+      </option>
+
+      <option value="CANCELLED">
+        Cancelado
+      </option>
+
+    </select>
+
+  </div>
+
+  <button type="submit">
+
+    {{ isEdit ? 'Actualizar' : 'Guardar' }}
+
+  </button>
+
+</form>

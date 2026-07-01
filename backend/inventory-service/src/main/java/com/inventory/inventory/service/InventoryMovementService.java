@@ -3,6 +3,7 @@ package com.inventory.inventory.service;
 import com.inventory.inventory.entity.InventoryMovement;
 import com.inventory.inventory.entity.Product;
 import com.inventory.inventory.entity.MovementType;
+import com.inventory.inventory.entity.MovementStatus;
 
 import com.inventory.inventory.repository.InventoryMovementRepository;
 import com.inventory.inventory.repository.ProductRepository;
@@ -18,82 +19,113 @@ import java.util.List;
 @Service
 public class InventoryMovementService {
 
-    @Autowired
-    private InventoryMovementRepository movementRepository;
+        @Autowired
+        private InventoryMovementRepository movementRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
+        @Autowired
+        private ProductRepository productRepository;
 
-    public InventoryMovement registerMovement(
-            Long productId,
-            String type,
-            Integer quantity
-    ) {
+        public InventoryMovement registerMovement(
+                        Long productId,
+                        String type,
+                        Integer quantity) {
 
-        Product product = productRepository
-                .findById(productId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Producto no encontrado"
-                        )
-                );
+                Product product = productRepository
+                                .findById(productId)
+                                .orElseThrow(() -> new ResourceNotFoundException(
+                                                "Producto no encontrado"));
 
-        MovementType movementType =
-                MovementType.valueOf(
-                        type.toUpperCase()
-                );
+                MovementType movementType = MovementType.valueOf(
+                                type.toUpperCase());
 
-        if (movementType == MovementType.EXIT) {
+                if (movementType == MovementType.EXIT) {
 
-            if (product.getStock() < quantity) {
+                        if (product.getStock() < quantity) {
 
-                throw new InsufficientStockException(
-                        "Stock insuficiente"
-                );
-            }
+                                throw new InsufficientStockException(
+                                                "Stock insuficiente");
+                        }
 
-            product.setStock(
-                    product.getStock() - quantity
-            );
+                        product.setStock(
+                                        product.getStock() - quantity);
 
-        } else {
+                } else {
 
-            product.setStock(
-                    product.getStock() + quantity
-            );
+                        product.setStock(
+                                        product.getStock() + quantity);
+                }
+
+                productRepository.save(product);
+
+                InventoryMovement movement = new InventoryMovement();
+
+                movement.setProduct(product);
+
+                movement.setType(movementType);
+
+                movement.setQuantity(quantity);
+
+                movement.setStatus(
+                                MovementStatus.PENDING);
+
+                return movementRepository.save(
+                                movement);
         }
 
-        productRepository.save(product);
+        public InventoryMovement updateStatus(
+                        Long movementId,
+                        String status) {
 
-        InventoryMovement movement =
-                new InventoryMovement();
+                InventoryMovement movement = movementRepository.findById(movementId)
+                                .orElseThrow(() -> new ResourceNotFoundException(
+                                                "Movimiento no encontrado"));
 
-        movement.setProduct(product);
+                MovementStatus newStatus = MovementStatus.valueOf(
+                                status.toUpperCase());
 
-        movement.setType(
-                movementType
-        );
+                if (newStatus == MovementStatus.DELIVERED
+                                &&
+                                movement.getStatus() != MovementStatus.DELIVERED) {
 
-        movement.setQuantity(
-                quantity
-        );
+                        Product product = movement.getProduct();
 
-        return movementRepository.save(
-                movement
-        );
-    }
+                        if (product.getStock() < movement.getQuantity()) {
 
-    public List<InventoryMovement> findAll() {
+                                throw new InsufficientStockException(
+                                                "Stock insuficiente");
+                        }
 
-        return movementRepository.findAll();
-    }
+                        product.setStock(
+                                        product.getStock()
+                                                        - movement.getQuantity());
 
-    public List<InventoryMovement> findByProduct(
-            Long productId
-    ) {
+                        productRepository.save(product);
+                }
 
-        return movementRepository.findByProductId(
-                productId
-        );
-    }
+                movement.setStatus(
+                                newStatus);
+
+                return movementRepository.save(
+                                movement);
+        }
+
+        public List<InventoryMovement> findAll() {
+
+                return movementRepository.findAll();
+        }
+
+        public List<InventoryMovement> findByProduct(
+                        Long productId) {
+
+                return movementRepository.findByProductId(
+                                productId);
+        }
+
+        public InventoryMovement findById(
+                        Long id) {
+
+                return movementRepository.findById(id)
+                                .orElseThrow(() -> new ResourceNotFoundException(
+                                                "Movimiento no encontrado"));
+        }
 }

@@ -21,7 +21,7 @@ export class Login {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   login(): void {
 
@@ -43,9 +43,8 @@ export class Login {
           response.role
         );
 
-        this.router.navigate([
-          '/dashboard'
-        ]);
+        window.location.href =
+          '/dashboard';
       },
 
       error: () => {

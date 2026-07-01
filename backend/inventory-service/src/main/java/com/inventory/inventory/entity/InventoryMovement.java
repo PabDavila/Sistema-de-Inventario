@@ -19,6 +19,9 @@ public class InventoryMovement {
 
     private LocalDateTime movementDate;
 
+    @Enumerated(EnumType.STRING)
+    private MovementStatus status;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -26,6 +29,8 @@ public class InventoryMovement {
     public InventoryMovement() {
 
         this.movementDate = LocalDateTime.now();
+
+        this.status = MovementStatus.PENDING;
 
     }
 
@@ -100,6 +105,14 @@ public class InventoryMovement {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public MovementStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MovementStatus status) {
+        this.status = status;
     }
 
 }

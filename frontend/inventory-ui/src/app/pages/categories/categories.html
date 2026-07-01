@@ -1,5 +1,12 @@
 <h2>Categorías</h2>
 
+<button
+  routerLink="/categorias/nuevo">
+
+  Nueva Categoría
+
+</button>
+
 <table border="1">
 
   <thead>
@@ -11,6 +18,8 @@
       <th>Nombre</th>
 
       <th>Descripción</th>
+
+      <th>Acciones</th>
 
     </tr>
 
@@ -26,6 +35,27 @@
       <td>{{ category.name }}</td>
 
       <td>{{ category.description }}</td>
+
+      <td>
+
+        <button
+          [routerLink]="[
+            '/categorias/editar',
+            category.id
+          ]">
+
+          Editar
+
+        </button>
+
+        <button
+          (click)="deleteCategory(category.id!)">
+
+          Eliminar
+
+        </button>
+
+      </td>
 
     </tr>
 

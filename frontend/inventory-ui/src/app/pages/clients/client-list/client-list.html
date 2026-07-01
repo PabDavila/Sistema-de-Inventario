@@ -1,17 +1,17 @@
 <h2>Clients</h2>
 
-<a routerLink="/clients/new">
-  New Client
+<a routerLink="/clients/nuevo">
+  Nuevo Cliente
 </a>
 
 <table>
 
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Nombre</th>
       <th>Email</th>
-      <th>Phone</th>
-      <th>Actions</th>
+      <th>Telefono</th>
+      <th>Acciones</th>
     </tr>
   </thead>
 
@@ -27,20 +27,13 @@
 
       <td>
 
-        <a
-          [routerLink]="[
-            '/clients/edit',
-            client.id
-          ]">
+        <button [routerLink]="['/clientes/editar', client.id]">
+          Editar
+        </button>
 
-          Edit
+        <button (click)="deleteClient(client.id!)">
 
-        </a>
-
-        <button
-          (click)="deleteClient(client.id!)">
-
-          Delete
+          Borrar
 
         </button>
 

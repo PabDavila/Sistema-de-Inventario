@@ -12,6 +12,7 @@ public class MovementResponse {
     private Integer quantity;
 
     private LocalDateTime movementDate;
+    private String status;
 
     public Long getId() {
         return id;
@@ -59,5 +60,13 @@ public class MovementResponse {
 
     public void setMovementDate(LocalDateTime movementDate) {
         this.movementDate = movementDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

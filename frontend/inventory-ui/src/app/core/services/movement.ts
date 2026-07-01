@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import { Movement } from '../../models/movement';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,12 +18,21 @@ export class MovementService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   getAll(): Observable<Movement[]> {
 
     return this.http.get<Movement[]>(
       this.API_URL
+    );
+  }
+
+  getByProduct(
+    productId: number
+  ): Observable<Movement[]> {
+
+    return this.http.get<Movement[]>(
+      `${this.API_URL}/product/${productId}`
     );
   }
 
@@ -35,4 +46,20 @@ export class MovementService {
     );
   }
 
+  getById(id: number): Observable<Movement> {
+    return this.http.get<Movement>(
+      `${this.API_URL}/${id}`
+    );
+  }
+
+  updateStatus(
+    id: number,
+    status: string
+  ): Observable<any> {
+
+    return this.http.put(
+      `${this.API_URL}/${id}/status`,
+      { status }
+    );
+  }
 }

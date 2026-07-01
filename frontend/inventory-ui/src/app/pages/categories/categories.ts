@@ -9,20 +9,22 @@ import { Category } from '../../models/category';
 
 import { CategoryService } from '../../core/services/category';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-categories',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './categories.html',
   styleUrl: './categories.css'
 })
 export class Categories
-implements OnInit {
+  implements OnInit {
 
   categories: Category[] = [];
 
   constructor(
     private categoryService: CategoryService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -43,6 +45,38 @@ implements OnInit {
         error: (err) => {
 
           console.error(err);
+        }
+      });
+  }
+
+  deleteCategory(
+    id: number
+  ): void {
+
+    if (
+      !confirm(
+        '¿Eliminar categoría?'
+      )
+    ) {
+      return;
+    }
+
+    this.categoryService
+      .delete(id)
+      .subscribe({
+
+        next: () => {
+
+          this.loadCategories();
+        },
+
+        error: (err) => {
+
+          console.error(err);
+
+          alert(
+            'Error al eliminar categoría'
+          );
         }
       });
   }

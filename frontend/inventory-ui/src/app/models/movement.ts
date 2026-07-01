@@ -1,13 +1,16 @@
 export interface Movement {
 
-    id?: number;
+  id?: number;
 
-    productId: number;
+  productId: number;
 
-    type: string;
+  productName?: string;
 
-    quantity: number;
+  type: string;
 
-    movementDate?: string;
+  quantity: number;
 
+  status?: string;
+
+  movementDate?: string;
 }

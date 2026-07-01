@@ -9,9 +9,11 @@ import { Movement } from '../../models/movement';
 
 import { MovementService } from '../../core/services/movement';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-movements',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './movements.html',
   styleUrl: './movements.css'
 })

@@ -2,9 +2,10 @@ package com.inventory.inventory.controller;
 
 import com.inventory.inventory.dto.MovementRequest;
 import com.inventory.inventory.dto.MovementResponse;
+import com.inventory.inventory.dto.MovementStatusRequest;
 
 import com.inventory.inventory.entity.InventoryMovement;
-
+import com.inventory.inventory.exception.ResourceNotFoundException;
 import com.inventory.inventory.mapper.InventoryMovementMapper;
 
 import com.inventory.inventory.service.InventoryMovementService;
@@ -67,4 +68,27 @@ public class InventoryMovementController {
                 .map(mapper::toResponse)
                 .toList();
     }
+
+    @PutMapping("/{id}/status")
+    public MovementResponse updateStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody MovementStatusRequest request) {
+
+        InventoryMovement movement = service.updateStatus(
+                id,
+                request.getStatus());
+
+        return mapper.toResponse(
+                movement);
+    }
+
+    @GetMapping("/{id}")
+    public MovementResponse getById(
+            @PathVariable Long id) {
+
+        InventoryMovement movement = service.findById(id);
+
+        return mapper.toResponse(movement);
+    }
+
 }
