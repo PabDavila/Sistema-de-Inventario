@@ -6,7 +6,10 @@
 
     <label>Usuario</label>
 
-    <input type="text" name="username" [(ngModel)]="username">
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="username" id="">
 
   </div>
 
@@ -16,7 +19,10 @@
 
     <label>Contraseña</label>
 
-    <input type="password" name="password" [(ngModel)]="password">
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password" id="">
 
   </div>
 
@@ -26,7 +32,9 @@
 
     <label>Rol</label>
 
-    <select name="role" [(ngModel)]="role">
+    <select
+      name="role"
+      [(ngModel)]="role" id="">
 
       <option value="ROLE_OPERATOR">
         Operador
@@ -47,7 +55,59 @@
   <br>
 
   <button type="submit">
+
     Crear Usuario
+
   </button>
 
 </form>
+
+<hr>
+
+<h3>Usuarios Registrados</h3>
+
+<table border="1">
+
+  <thead>
+
+    <tr>
+
+      <th>ID</th>
+
+      <th>Usuario</th>
+
+      <th>Rol</th>
+
+      <th>Acciones</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr
+      *ngFor="let user of users">
+
+      <td>{{ user.id }}</td>
+
+      <td>{{ user.username }}</td>
+
+      <td>{{ user.role }}</td>
+
+      <td>
+
+        <button
+          (click)="deleteUser(user.id!)">
+
+          Eliminar
+
+        </button>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>

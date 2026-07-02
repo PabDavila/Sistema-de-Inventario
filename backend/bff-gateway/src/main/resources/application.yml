@@ -34,3 +34,8 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/clients/**
+
+        - id: auth-users
+          uri: http://localhost:8081
+          predicates:
+            - Path=/users/**
