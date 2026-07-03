@@ -18,82 +18,84 @@ import java.util.List;
 @Service
 public class DispatchService {
 
-    @Autowired
-    private DispatchRepository dispatchRepository;
+        @Autowired
+        private DispatchRepository dispatchRepository;
 
-    @Autowired
-    private OrderRepository orderRepository;
+        @Autowired
+        private OrderRepository orderRepository;
 
-    public Dispatch create(
-            DispatchRequest request
-    ) {
+        public Dispatch create(
+                        DispatchRequest request) {
 
-        Order order =
-                orderRepository.findById(
-                        request.getOrderId()
-                )
-                .orElseThrow(
-                        () ->
-                                new ResourceNotFoundException(
-                                        "Order not found"
-                                )
-                );
+                Order order = orderRepository.findById(
+                                request.getOrderId())
+                                .orElseThrow(
+                                                () -> new ResourceNotFoundException(
+                                                                "Order not found"));
 
-        Dispatch dispatch =
-                new Dispatch();
+                Dispatch dispatch = new Dispatch();
 
-        dispatch.setOrder(
-                order
-        );
+                dispatch.setOrder(
+                                order);
 
-        dispatch.setStatus(
-                request.getStatus()
-        );
+                dispatch.setStatus(
+                                request.getStatus());
 
-        dispatch.setDeliveryAddress(
-                request.getDeliveryAddress()
-        );
+                dispatch.setDeliveryAddress(
+                                order.getClient().getAddress());
 
-        dispatch.setDeliveryUserId(
-                request.getDeliveryUserId()
-        );
+                dispatch.setDeliveryUserId(
+                                request.getDeliveryUserId());
 
-        dispatch.setOperatorUserId(
-                request.getOperatorUserId()
-        );
+                dispatch.setOperatorUserId(
+                                request.getOperatorUserId());
 
-        return dispatchRepository.save(
-                dispatch
-        );
-    }
+                return dispatchRepository.save(
+                                dispatch);
+        }
 
-    public List<Dispatch> findAll() {
+        public List<Dispatch> findAll() {
 
-        return dispatchRepository.findAll();
-    }
+                return dispatchRepository.findAll();
+        }
 
-    public Dispatch findById(
-            Long id
-    ) {
+        public Dispatch findById(
+                        Long id) {
 
-        return dispatchRepository.findById(id)
-                .orElseThrow(
-                        () ->
-                                new ResourceNotFoundException(
-                                        "Dispatch not found"
-                                )
-                );
-    }
+                return dispatchRepository.findById(id)
+                                .orElseThrow(
+                                                () -> new ResourceNotFoundException(
+                                                                "Dispatch not found"));
+        }
 
-    public void delete(
-            Long id
-    ) {
+        public void delete(
+                        Long id) {
 
-        Dispatch dispatch =
-                findById(id);
+                Dispatch dispatch = findById(id);
 
-        dispatchRepository.delete(
-                dispatch
-        );
-    }
+                dispatchRepository.delete(
+                                dispatch);
+        }
+
+        public Dispatch update(
+                        Long id,
+                        DispatchRequest request) {
+
+                Dispatch dispatch = findById(id);
+
+                dispatch.setStatus(
+                                request.getStatus());
+
+                dispatch.setDeliveryAddress(
+                                request.getDeliveryAddress());
+
+                dispatch.setDeliveryUserId(
+                                request.getDeliveryUserId());
+
+                dispatch.setOperatorUserId(
+                                request.getOperatorUserId());
+
+                return dispatchRepository.save(
+                                dispatch);
+        }
 }

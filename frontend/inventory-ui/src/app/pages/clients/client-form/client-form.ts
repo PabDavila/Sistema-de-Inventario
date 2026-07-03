@@ -7,7 +7,8 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  FormsModule
 } from '@angular/forms';
 
 import {
@@ -19,11 +20,14 @@ import {
   ClientService
 } from '../../../core/services/client';
 
+
+
 @Component({
   selector: 'app-client-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './client-form.html'
 })
@@ -44,21 +48,26 @@ export class ClientForm implements OnInit {
 
     this.form = this.fb.group({
 
-      name: [
-        '',
-        Validators.required
-      ],
+  name: [
+    '',
+    Validators.required
+  ],
 
-      email: [
-        '',
-        Validators.required
-      ],
+  email: [
+    '',
+    Validators.required
+  ],
 
-      phone: [
-        '',
-        Validators.required
-      ]
-    });
+  phone: [
+    '',
+    Validators.required
+  ],
+
+  address: [
+    '',
+    Validators.required
+  ]
+});
   }
 
   ngOnInit(): void {

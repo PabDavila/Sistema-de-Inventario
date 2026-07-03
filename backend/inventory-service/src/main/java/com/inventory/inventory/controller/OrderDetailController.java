@@ -4,7 +4,6 @@ import com.inventory.inventory.dto.OrderDetailRequest;
 import com.inventory.inventory.dto.OrderDetailResponse;
 
 import com.inventory.inventory.mapper.OrderDetailMapper;
-
 import com.inventory.inventory.service.OrderDetailService;
 
 import jakarta.validation.Valid;

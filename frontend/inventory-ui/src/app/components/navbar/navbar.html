@@ -22,6 +22,12 @@
 
   </a>
 
+  <a *ngIf="isAdmin() || isOperator()" routerLink="/pedidos">
+
+    Pedidos
+
+  </a>
+
   <a *ngIf="isAdmin() || isDelivery()" routerLink="/clientes">
 
     Clientes
@@ -29,7 +35,9 @@
   </a>
 
   <a *ngIf="role === 'ROLE_ADMIN'" routerLink="/usuarios">
+
     Usuarios
+
   </a>
 
   <span class="role">

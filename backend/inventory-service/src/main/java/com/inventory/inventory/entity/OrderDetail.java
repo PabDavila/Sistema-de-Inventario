@@ -14,18 +14,22 @@ public class OrderDetail {
 
     @ManyToOne
     @JoinColumn(
-            name = "order_id"
+            name = "order_id",
+            nullable = false
     )
     private Order order;
 
     @ManyToOne
     @JoinColumn(
-            name = "product_id"
+            name = "product_id",
+            nullable = false
     )
     private Product product;
 
+    @Column(nullable = false)
     private Integer quantity;
 
+    @Column(nullable = false)
     private Double unitPrice;
 
     public Long getId() {
@@ -66,5 +70,11 @@ public class OrderDetail {
 
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    @Transient
+    public Double getSubtotal() {
+
+        return unitPrice * quantity;
     }
 }

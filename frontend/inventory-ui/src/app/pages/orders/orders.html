@@ -1,0 +1,84 @@
+<h2>Pedidos</h2>
+
+<a routerLink="/pedidos/nuevo">
+
+  Nuevo Pedido
+
+</a>
+
+<br>
+<br>
+
+<table border="1">
+
+  <thead>
+
+    <tr>
+
+      <th>ID</th>
+
+      <th>Cliente</th>
+
+      <th>Estado</th>
+
+      <th>Observación</th>
+
+      <th>Fecha</th>
+
+      <th>Acciones</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr
+      *ngFor="let order of orders">
+
+      <td>
+
+        {{ order.id }}
+
+      </td>
+
+      <td>
+
+        {{ order.clientId }}
+
+      </td>
+
+      <td>
+
+        {{ order.status }}
+
+      </td>
+
+      <td>
+
+        {{ order.observation }}
+
+      </td>
+
+      <td>
+
+        {{ order.orderDate }}
+
+      </td>
+
+      <td>
+
+        <button
+          (click)="deleteOrder(order.id!)">
+
+          Eliminar
+
+        </button>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>

@@ -19,54 +19,59 @@ import java.util.List;
 @RequestMapping("/dispatches")
 public class DispatchController {
 
-    @Autowired
-    private DispatchService service;
+        @Autowired
+        private DispatchService service;
 
-    @Autowired
-    private DispatchMapper mapper;
+        @Autowired
+        private DispatchMapper mapper;
 
-    @PostMapping
-    public DispatchResponse create(
-            @RequestBody
-            DispatchRequest request
-    ) {
+        @PostMapping
+        public DispatchResponse create(
+                        @RequestBody DispatchRequest request) {
 
-        Dispatch dispatch =
-                service.create(
-                        request
-                );
+                Dispatch dispatch = service.create(
+                                request);
 
-        return mapper.toResponse(
-                dispatch
-        );
-    }
+                return mapper.toResponse(
+                                dispatch);
+        }
 
-    @GetMapping
-    public List<DispatchResponse> getAll() {
+        @GetMapping
+        public List<DispatchResponse> getAll() {
 
-        return service.findAll()
-                .stream()
-                .map(
-                        mapper::toResponse
-                )
-                .toList();
-    }
+                return service.findAll()
+                                .stream()
+                                .map(
+                                                mapper::toResponse)
+                                .toList();
+        }
 
-    @GetMapping("/{id}")
-    public DispatchResponse getById(
-            @PathVariable Long id
-    ) {
+        @GetMapping("/{id}")
+        public DispatchResponse getById(
+                        @PathVariable Long id) {
 
-        return mapper.toResponse(
-                service.findById(id)
-        );
-    }
+                return mapper.toResponse(
+                                service.findById(id));
+        }
 
-    @DeleteMapping("/{id}")
-    public void delete(
-            @PathVariable Long id
-    ) {
+        @DeleteMapping("/{id}")
+        public void delete(
+                        @PathVariable Long id) {
 
-        service.delete(id);
-    }
+                service.delete(id);
+        }
+
+        @PutMapping("/{id}")
+        public DispatchResponse update(
+                        @PathVariable Long id,
+                        @RequestBody DispatchRequest request) {
+
+                Dispatch dispatch = service.update(
+                                id,
+                                request);
+
+                return mapper.toResponse(
+                                dispatch);
+        }
+
 }

@@ -15,10 +15,20 @@ public class ClientMapper {
                 new ClientResponse();
 
         dto.setId(client.getId());
-        dto.setName(client.getName());
-        dto.setPhone(client.getPhone());
-        dto.setEmail(client.getEmail());
+
+        dto.setName(
+                client.getName());
+
+        dto.setPhone(
+                client.getPhone());
+
+        dto.setEmail(
+                client.getEmail());
+
+        dto.setAddress(
+                client.getAddress());
 
         return dto;
     }
+
 }

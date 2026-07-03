@@ -10,6 +10,8 @@ public class ClientResponse {
 
     private String email;
 
+    private String address;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class ClientResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

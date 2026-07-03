@@ -1,0 +1,152 @@
+<h2>Nuevo Pedido</h2>
+
+<form
+  [formGroup]="form"
+  (ngSubmit)="save()">
+
+  <label>
+
+    Cliente
+
+  </label>
+
+  <select
+    formControlName="clientId" id="">
+
+    <option
+      *ngFor="let client of clients"
+      [value]="client.id">
+
+      {{ client.name }}
+
+    </option>
+
+  </select>
+
+  <br>
+  <br>
+
+  <label>
+
+    Estado
+
+  </label>
+
+  <input
+    type="text"
+    formControlName="status" id="">
+
+  <br>
+  <br>
+
+  <label>
+
+    Observación
+
+  </label>
+
+  <input
+    type="text"
+    formControlName="observation" id="">
+
+  <br>
+  <br>
+
+  <hr>
+
+  <h3>
+
+    Productos
+
+  </h3>
+
+  <select
+    [(ngModel)]="selectedProductId"
+    [ngModelOptions]="{standalone:true}" id="">
+
+    <option
+      [value]="0">
+
+      Seleccione producto
+
+    </option>
+
+    <option
+      *ngFor="let product of products"
+      [value]="product.id">
+
+      {{ product.name }}
+
+    </option>
+
+  </select>
+
+  <input
+    type="number"
+    min="1"
+    [(ngModel)]="selectedQuantity"
+    [ngModelOptions]="{standalone:true}" id="">
+
+  <button
+    type="button"
+    (click)="addProduct()">
+
+    Agregar
+
+  </button>
+
+  <br>
+  <br>
+
+  <table
+    *ngIf="details.length > 0">
+
+    <thead>
+
+      <tr>
+
+        <th>
+          Producto
+        </th>
+
+        <th>
+          Cantidad
+        </th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr
+        *ngFor="let detail of details">
+
+        <td>
+
+          {{ detail.productName }}
+
+        </td>
+
+        <td>
+
+          {{ detail.quantity }}
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <br>
+
+  <button
+    type="submit">
+
+    Guardar
+
+  </button>
+
+</form>

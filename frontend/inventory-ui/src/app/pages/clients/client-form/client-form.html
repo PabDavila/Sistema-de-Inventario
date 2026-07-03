@@ -1,31 +1,25 @@
-<h2>Nuevo Cliente</h2>
-
 <form [formGroup]="form" (ngSubmit)="save()">
 
-    <h2>
-  {{ isEditMode ? 'Editar Cliente' : 'Nuevo Cliente' }}
-</h2>
+  <h2>
+    {{ isEditMode ? 'Editar Cliente' : 'Nuevo Cliente' }}
+  </h2>
 
-<form [formGroup]="form" (ngSubmit)="save()">
+  <form [formGroup]="form" (ngSubmit)="save()">
 
-  <input
-    formControlName="name"
-    placeholder="Nombre" id="">
+    <input formControlName="name" placeholder="Nombre" id="">
 
-  <input
-    formControlName="email"
-    placeholder="Email" id>
+    <input formControlName="email" placeholder="Email" id>
 
-  <input
-    formControlName="phone"
-    placeholder="Teléfono" id>
+    <input formControlName="phone" placeholder="Teléfono" id>
 
-  <button type="submit">
+    <input type="text" formControlName="address" name="address" placeholder="Dirección" id="">
 
-    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+    <button type="submit">
 
-  </button>
+      {{ isEditMode ? 'Actualizar' : 'Guardar' }}
 
-</form>
+    </button>
+
+  </form>
 
 </form>

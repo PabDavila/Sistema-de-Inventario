@@ -16,6 +16,8 @@ public class Client {
 
     private String email;
 
+    private String address;
+
     public Client() {
     }
 
@@ -49,5 +51,13 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

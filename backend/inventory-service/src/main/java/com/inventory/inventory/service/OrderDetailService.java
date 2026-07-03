@@ -6,11 +6,11 @@ import com.inventory.inventory.entity.Order;
 import com.inventory.inventory.entity.OrderDetail;
 import com.inventory.inventory.entity.Product;
 
-import com.inventory.inventory.exception.ResourceNotFoundException;
 import com.inventory.inventory.exception.InsufficientStockException;
+import com.inventory.inventory.exception.ResourceNotFoundException;
 
-import com.inventory.inventory.repository.OrderRepository;
 import com.inventory.inventory.repository.OrderDetailRepository;
+import com.inventory.inventory.repository.OrderRepository;
 import com.inventory.inventory.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,18 +57,32 @@ public class OrderDetailService {
                 );
 
         if (
+                request.getQuantity() == null
+                || request.getQuantity() <= 0
+        ) {
+
+            throw new IllegalArgumentException(
+                    "Quantity must be greater than zero"
+            );
+        }
+
+        if (
                 product.getStock()
                 < request.getQuantity()
         ) {
 
             throw new InsufficientStockException(
-                    "Insufficient stock"
+                    "Insufficient stock. Available: "
+                            + product.getStock()
             );
         }
 
-        product.setStock(
+        int newStock =
                 product.getStock()
-                - request.getQuantity()
+                - request.getQuantity();
+
+        product.setStock(
+                newStock
         );
 
         productRepository.save(

@@ -11,6 +11,8 @@ public class ClientRequest {
 
     private String email;
 
+    private String address;
+
     public String getName() {
         return name;
     }
@@ -33,5 +35,13 @@ public class ClientRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

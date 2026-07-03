@@ -11,6 +11,8 @@ import { ClientForm } from './pages/clients/client-form/client-form';
 import { ProductForm } from './pages/products/product-form/product-form';
 import { CategoryForm } from './pages/categories/category-form/category-form';
 import { MovementForm } from './pages/movements/movement-form/movement-form';
+import { Orders } from './pages/orders/order';
+import { OrderForm } from './pages/orders/order-form/order-form';
 import { roleGuard } from './core/guards/role-guard';
 
 
@@ -185,6 +187,29 @@ export const routes: Routes = [
       roleGuard([
         'ROLE_ADMIN',
         'ROLE_DELIVERY'
+      ])
+    ]
+  },
+
+  {
+    path: 'pedidos',
+    component: Orders,
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR'
+      ])
+    ]
+  },
+  {
+    path: 'pedidos/nuevo',
+    component: OrderForm,
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR'
       ])
     ]
   },
