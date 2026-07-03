@@ -13,56 +13,56 @@ import java.util.List;
 @Service
 public class ClientService {
 
-    private final ClientRepository repository;
+        private final ClientRepository repository;
 
-    public ClientService(
-            ClientRepository repository) {
+        public ClientService(
+                        ClientRepository repository) {
 
-        this.repository = repository;
-    }
+                this.repository = repository;
+        }
 
-    public List<Client> findAll() {
+        public List<Client> findAll() {
 
-        return repository.findAll();
-    }
+                return repository.findAll();
+        }
 
-    public Client findById(
-            Long id) {
+        public Client findById(
+                        Long id) {
 
-        return repository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Client not found"));
-    }
+                return repository.findById(id)
+                                .orElseThrow(() -> new ResourceNotFoundException(
+                                                "Client not found"));
+        }
 
-    public Client save(
-            Client client) {
+        public Client save(
+                        Client client) {
 
-        return repository.save(client);
-    }
+                return repository.save(client);
+        }
 
-    public Client update(
-            Long id,
-            Client updatedClient) {
+        public Client update(
+                        Long id,
+                        Client updatedClient) {
 
-        Client client =
-                findById(id);
+                Client client = findById(id);
 
-        client.setName(
-                updatedClient.getName());
+                client.setName(
+                                updatedClient.getName());
 
-        client.setPhone(
-                updatedClient.getPhone());
+                client.setPhone(
+                                updatedClient.getPhone());
 
-        client.setEmail(
-                updatedClient.getEmail());
+                client.setEmail(
+                                updatedClient.getEmail());
 
-        return repository.save(client);
-    }
+                client.setAddress(updatedClient.getAddress());
 
-    public void delete(
-            Long id) {
+                return repository.save(client);
+        }
 
-        repository.deleteById(id);
-    }
+        public void delete(
+                        Long id) {
+
+                repository.deleteById(id);
+        }
 }

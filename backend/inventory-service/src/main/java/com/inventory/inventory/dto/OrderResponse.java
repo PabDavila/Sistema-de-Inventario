@@ -8,6 +8,10 @@ public class OrderResponse {
 
     private Long clientId;
 
+    private String clientName;
+
+    private String clientAddress;
+
     private String status;
 
     private String observation;
@@ -34,6 +38,22 @@ public class OrderResponse {
         this.clientId = clientId;
     }
 
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getClientAddress() {
+        return clientAddress;
+    }
+
+    public void setClientAddress(String clientAddress) {
+        this.clientAddress = clientAddress;
+    }
+
     public String getStatus() {
 
         return status;
@@ -50,8 +70,7 @@ public class OrderResponse {
     }
 
     public void setObservation(
-            String observation
-    ) {
+            String observation) {
 
         this.observation = observation;
     }
@@ -62,8 +81,7 @@ public class OrderResponse {
     }
 
     public void setOrderDate(
-            LocalDateTime orderDate
-    ) {
+            LocalDateTime orderDate) {
 
         this.orderDate = orderDate;
     }

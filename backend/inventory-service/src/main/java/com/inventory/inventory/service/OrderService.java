@@ -8,7 +8,9 @@ import com.inventory.inventory.entity.Order;
 import com.inventory.inventory.exception.ResourceNotFoundException;
 
 import com.inventory.inventory.repository.ClientRepository;
+import com.inventory.inventory.repository.OrderDetailRepository;
 import com.inventory.inventory.repository.OrderRepository;
+import com.inventory.inventory.repository.OrderDetailRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,73 +20,62 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+        @Autowired
+        private OrderRepository orderRepository;
 
-    @Autowired
-    private ClientRepository clientRepository;
+        @Autowired
+        private ClientRepository clientRepository;
 
-    public Order create(
-            OrderRequest request
-    ) {
+        @Autowired
+        private OrderDetailRepository orderDetailRepository;
 
-        Client client =
-                clientRepository.findById(
-                        request.getClientId()
-                )
-                .orElseThrow(
-                        () ->
-                                new ResourceNotFoundException(
-                                        "Client not found"
-                                )
-                );
+        public Order create(
+                        OrderRequest request) {
 
-        Order order = new Order();
+                Client client = clientRepository.findById(
+                                request.getClientId())
+                                .orElseThrow(
+                                                () -> new ResourceNotFoundException(
+                                                                "Client not found"));
 
-        order.setClient(
-                client
-        );
+                Order order = new Order();
 
-        order.setStatus(
-                request.getStatus()
-        );
+                order.setClient(
+                                client);
 
-        order.setObservation(
-                request.getObservation()
-        );
+                order.setStatus(
+                                request.getStatus());
 
-        return orderRepository.save(
-                order
-        );
-    }
+                order.setObservation(
+                                request.getObservation());
 
-    public List<Order> findAll() {
+                return orderRepository.save(
+                                order);
+        }
 
-        return orderRepository.findAll();
-    }
+        public List<Order> findAll() {
 
-    public Order findById(
-            Long id
-    ) {
+                return orderRepository.findAll();
+        }
 
-        return orderRepository.findById(id)
-                .orElseThrow(
-                        () ->
-                                new ResourceNotFoundException(
-                                        "Order not found"
-                                )
-                );
-    }
+        public Order findById(
+                        Long id) {
 
-    public void delete(
-            Long id
-    ) {
+                return orderRepository.findById(id)
+                                .orElseThrow(
+                                                () -> new ResourceNotFoundException(
+                                                                "Order not found"));
+        }
 
-        Order order =
-                findById(id);
+        public void delete(
+                        Long id) {
 
-        orderRepository.delete(
-                order
-        );
-    }
+                Order order = findById(id);
+
+                orderDetailRepository.deleteByOrderId(
+                                id);
+
+                orderRepository.delete(
+                                order);
+        }
 }

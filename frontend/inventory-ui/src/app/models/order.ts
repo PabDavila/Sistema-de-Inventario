@@ -1,8 +1,12 @@
 export interface Order {
 
-  id?: number;
+  id: number;
 
   clientId: number;
+
+  clientName?: string;
+
+  clientAddress?: string;
 
   status: string;
 

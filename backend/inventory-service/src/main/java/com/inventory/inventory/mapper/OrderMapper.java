@@ -8,33 +8,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderMapper {
 
-    public OrderResponse toResponse(
-            Order order
-    ) {
+        public OrderResponse toResponse(
+                        Order order) {
 
-        OrderResponse response =
-                new OrderResponse();
+                OrderResponse response = new OrderResponse();
 
-        response.setId(
-                order.getId()
-        );
+                response.setId(
+                                order.getId());
 
-        response.setClientId(
-                order.getClient().getId()
-        );
+                response.setClientId(
+                                order.getClient().getId());
 
-        response.setStatus(
-                order.getStatus()
-        );
+                response.setClientName(
+                                order.getClient().getName());
 
-        response.setObservation(
-                order.getObservation()
-        );
+                response.setClientAddress(
+                                order.getClient().getAddress());
 
-        response.setOrderDate(
-                order.getOrderDate()
-        );
+                response.setStatus(
+                                order.getStatus());
 
-        return response;
-    }
+                response.setObservation(
+                                order.getObservation());
+
+                response.setOrderDate(
+                                order.getOrderDate());
+
+                return response;
+        }
 }

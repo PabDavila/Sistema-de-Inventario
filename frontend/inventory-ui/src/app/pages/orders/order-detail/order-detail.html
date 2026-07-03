@@ -1,0 +1,121 @@
+<h2>
+
+    Detalle Pedido
+
+</h2>
+
+<div *ngIf="order">
+
+    <p>
+
+        <strong>ID:</strong>
+
+        {{ order.id }}
+
+    </p>
+
+    <p>
+
+        <strong>Cliente:</strong>
+
+        {{ order.clientName }}
+
+    </p>
+
+    <p>
+
+        <strong>Dirección:</strong>
+
+        {{ order.clientAddress }}
+
+    </p>
+
+    <p>
+
+        <strong>Estado:</strong>
+
+        {{ order.status }}
+
+    </p>
+
+    <p>
+
+        <strong>Observación:</strong>
+
+        {{ order.observation }}
+
+    </p>
+
+    <p>
+
+        <strong>Fecha:</strong>
+
+        {{ order.orderDate }}
+
+    </p>
+
+</div>
+
+<hr>
+
+<h3>
+
+    Productos
+
+</h3>
+
+<table *ngIf="details.length > 0">
+
+    <thead>
+
+        <tr>
+
+            <th>
+                Producto
+            </th>
+
+            <th>
+                Cantidad
+            </th>
+
+            <th>
+                Precio Unitario
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let detail of details">
+
+            <td>
+
+                {{ detail.productName }}
+
+            </td>
+
+            <td style="text-align: center;">
+
+                {{ detail.quantity }}
+
+            </td>
+
+            <td>
+
+                ${{ detail.unitPrice }}
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+<p *ngIf="details.length === 0">
+
+    No hay productos asociados al pedido.
+
+</p>

@@ -19,84 +19,86 @@ import java.util.List;
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final ClientService service;
+        private final ClientService service;
 
-    private final ClientMapper mapper;
+        private final ClientMapper mapper;
 
-    public ClientController(
-            ClientService service,
-            ClientMapper mapper) {
+        public ClientController(
+                        ClientService service,
+                        ClientMapper mapper) {
 
-        this.service = service;
-        this.mapper = mapper;
-    }
+                this.service = service;
+                this.mapper = mapper;
+        }
 
-    @GetMapping
-    public List<ClientResponse> getAll() {
+        @GetMapping
+        public List<ClientResponse> getAll() {
 
-        return service.findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
+                return service.findAll()
+                                .stream()
+                                .map(mapper::toResponse)
+                                .toList();
+        }
 
-    @GetMapping("/{id}")
-    public ClientResponse getById(
-            @PathVariable Long id) {
+        @GetMapping("/{id}")
+        public ClientResponse getById(
+                        @PathVariable Long id) {
 
-        return mapper.toResponse(
-                service.findById(id));
-    }
+                return mapper.toResponse(
+                                service.findById(id));
+        }
 
-    @PostMapping
-    public ClientResponse create(
-            @Valid @RequestBody
-            ClientRequest request) {
+        @PostMapping
+        public ClientResponse create(
+                        @Valid @RequestBody ClientRequest request) {
 
-        Client client =
-                new Client();
+                Client client = new Client();
 
-        client.setName(
-                request.getName());
+                client.setName(
+                                request.getName());
 
-        client.setPhone(
-                request.getPhone());
+                client.setPhone(
+                                request.getPhone());
 
-        client.setEmail(
-                request.getEmail());
+                client.setEmail(
+                                request.getEmail());
 
-        return mapper.toResponse(
-                service.save(client));
-    }
+                client.setAddress(
+                                request.getAddress());
 
-    @PutMapping("/{id}")
-    public ClientResponse update(
-            @PathVariable Long id,
-            @Valid @RequestBody
-            ClientRequest request) {
+                return mapper.toResponse(
+                                service.save(client));
+        }
 
-        Client client =
-                new Client();
+        @PutMapping("/{id}")
+        public ClientResponse update(
+                        @PathVariable Long id,
+                        @Valid @RequestBody ClientRequest request) {
 
-        client.setName(
-                request.getName());
+                Client client = new Client();
 
-        client.setPhone(
-                request.getPhone());
+                client.setName(
+                                request.getName());
 
-        client.setEmail(
-                request.getEmail());
+                client.setPhone(
+                                request.getPhone());
 
-        return mapper.toResponse(
-                service.update(
-                        id,
-                        client));
-    }
+                client.setEmail(
+                                request.getEmail());
 
-    @DeleteMapping("/{id}")
-    public void delete(
-            @PathVariable Long id) {
+                client.setAddress(
+                                request.getAddress());
 
-        service.delete(id);
-    }
+                return mapper.toResponse(
+                                service.update(
+                                                id,
+                                                client));
+        }
+
+        @DeleteMapping("/{id}")
+        public void delete(
+                        @PathVariable Long id) {
+
+                service.delete(id);
+        }
 }

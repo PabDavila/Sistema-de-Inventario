@@ -1,8 +1,6 @@
 <h2>Nuevo Pedido</h2>
 
-<form
-  [formGroup]="form"
-  (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="save()">
 
   <label>
 
@@ -10,12 +8,9 @@
 
   </label>
 
-  <select
-    formControlName="clientId" id="">
+  <select formControlName="clientId" id="">
 
-    <option
-      *ngFor="let client of clients"
-      [value]="client.id">
+    <option *ngFor="let client of clients" [value]="client.id">
 
       {{ client.name }}
 
@@ -32,9 +27,29 @@
 
   </label>
 
-  <input
-    type="text"
-    formControlName="status" id="">
+  <select formControlName="status" id="">
+
+    <option value="PENDING">
+      Pendiente
+    </option>
+
+    <option value="APPROVED">
+      Aprobado
+    </option>
+
+    <option value="DISPATCHED">
+      Despachado
+    </option>
+
+    <option value="DELIVERED">
+      Entregado
+    </option>
+
+    <option value="CANCELLED">
+      Cancelado
+    </option>
+
+  </select>
 
   <br>
   <br>
@@ -45,9 +60,7 @@
 
   </label>
 
-  <input
-    type="text"
-    formControlName="observation" id="">
+  <input type="text" formControlName="observation" id="">
 
   <br>
   <br>
@@ -60,20 +73,15 @@
 
   </h3>
 
-  <select
-    [(ngModel)]="selectedProductId"
-    [ngModelOptions]="{standalone:true}" id="">
+  <select [(ngModel)]="selectedProductId" [ngModelOptions]="{standalone:true}" id="">
 
-    <option
-      [value]="0">
+    <option [value]="0">
 
       Seleccione producto
 
     </option>
 
-    <option
-      *ngFor="let product of products"
-      [value]="product.id">
+    <option *ngFor="let product of products" [value]="product.id">
 
       {{ product.name }}
 
@@ -81,15 +89,9 @@
 
   </select>
 
-  <input
-    type="number"
-    min="1"
-    [(ngModel)]="selectedQuantity"
-    [ngModelOptions]="{standalone:true}" id="">
+  <input type="number" min="1" [(ngModel)]="selectedQuantity" [ngModelOptions]="{standalone:true}" id="">
 
-  <button
-    type="button"
-    (click)="addProduct()">
+  <button type="button" (click)="addProduct()">
 
     Agregar
 
@@ -98,8 +100,7 @@
   <br>
   <br>
 
-  <table
-    *ngIf="details.length > 0">
+  <table *ngIf="details.length > 0">
 
     <thead>
 
@@ -119,8 +120,7 @@
 
     <tbody>
 
-      <tr
-        *ngFor="let detail of details">
+      <tr *ngFor="let detail of details">
 
         <td>
 
@@ -142,8 +142,7 @@
 
   <br>
 
-  <button
-    type="submit">
+  <button type="submit">
 
     Guardar
 

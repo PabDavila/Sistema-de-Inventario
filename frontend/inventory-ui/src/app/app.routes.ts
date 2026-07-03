@@ -13,6 +13,7 @@ import { CategoryForm } from './pages/categories/category-form/category-form';
 import { MovementForm } from './pages/movements/movement-form/movement-form';
 import { Orders } from './pages/orders/order';
 import { OrderForm } from './pages/orders/order-form/order-form';
+import { OrderDetail } from './pages/orders/order-detail/order-detail';
 import { roleGuard } from './core/guards/role-guard';
 
 
@@ -210,6 +211,19 @@ export const routes: Routes = [
       roleGuard([
         'ROLE_ADMIN',
         'ROLE_OPERATOR'
+      ])
+    ]
+  },
+
+  {
+    path: 'orders/:id',
+    component: OrderDetail,
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR',
+        'ROLE_DELIVERY'
       ])
     ]
   },
