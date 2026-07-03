@@ -229,6 +229,11 @@ export const routes: Routes = [
   },
 
   {
+    path: 'orders/edit/:id',
+    component: OrderForm
+  },
+
+  {
     path: '**',
     redirectTo: 'login'
   }

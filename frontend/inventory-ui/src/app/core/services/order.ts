@@ -16,7 +16,7 @@ export class OrderService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   getAll(): Observable<Order[]> {
 
@@ -50,6 +50,17 @@ export class OrderService {
 
     return this.http.delete<void>(
       `${this.API_URL}/${id}`
+    );
+  }
+
+  update(
+    id: number,
+    order: Order
+  ): Observable<Order> {
+
+    return this.http.put<Order>(
+      `${this.API_URL}/${id}`,
+      order
     );
   }
 }

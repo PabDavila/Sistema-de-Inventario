@@ -9,7 +9,8 @@ import {
 } from '@angular/forms';
 
 import {
-  Router
+  Router,
+  ActivatedRoute
 } from '@angular/router';
 
 import {
@@ -65,13 +66,18 @@ export class OrderForm
 
   selectedQuantity = 1;
 
+  isEditMode = false;
+
+  orderId = 0;
+
   constructor(
     private fb: FormBuilder,
     private orderService: OrderService,
     private orderDetailService: OrderDetailService,
     private clientService: ClientService,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
     this.form = this.fb.group({
@@ -106,9 +112,41 @@ export class OrderForm
 
         this.products = data;
       });
+
+    const id =
+      this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+
+      this.isEditMode = true;
+
+      this.orderId = +id;
+
+      this.orderService
+        .getById(this.orderId)
+        .subscribe(order => {
+
+          this.form.patchValue(order);
+
+          this.form
+            .get('clientId')
+            ?.disable();
+        });
+
+      this.orderDetailService
+        .getByOrder(this.orderId)
+        .subscribe(details => {
+
+          this.details = details;
+        });
+    }
   }
 
   addProduct(): void {
+
+    if (this.isEditMode) {
+      return;
+    }
 
     const product =
       this.products.find(
@@ -141,6 +179,35 @@ export class OrderForm
     if (
       this.form.invalid
     ) {
+      return;
+    }
+
+    if (this.isEditMode) {
+
+      const data = {
+
+        status:
+          this.form.get('status')?.value,
+
+        observation:
+          this.form.get('observation')?.value,
+
+        clientId:
+          this.form.getRawValue().clientId
+      };
+
+      this.orderService
+        .update(
+          this.orderId,
+          data
+        )
+        .subscribe(() => {
+
+          this.router.navigate([
+            '/orders'
+          ]);
+        });
+
       return;
     }
 

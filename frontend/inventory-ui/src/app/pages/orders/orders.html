@@ -75,9 +75,12 @@
 
       <td>
 
-        <button (click)="deleteOrder(order.id!)">
+        <button [routerLink]="[
+    '/orders/edit',
+    order.id
+  ]">
 
-          Eliminar
+          Modificar
 
         </button>
         <button [routerLink]="[

@@ -1,6 +1,6 @@
 export interface Order {
 
-  id: number;
+  id?: number;
 
   clientId: number;
 

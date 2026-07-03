@@ -21,55 +21,56 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService service;
+        @Autowired
+        private OrderService service;
 
-    @Autowired
-    private OrderMapper mapper;
+        @Autowired
+        private OrderMapper mapper;
 
-    @PostMapping
-    public OrderResponse create(
-            @Valid
-            @RequestBody
-            OrderRequest request
-    ) {
+        @PostMapping
+        public OrderResponse create(
+                        @Valid @RequestBody OrderRequest request) {
 
-        Order order =
-                service.create(
-                        request
-                );
+                Order order = service.create(
+                                request);
 
-        return mapper.toResponse(
-                order
-        );
-    }
+                return mapper.toResponse(
+                                order);
+        }
 
-    @GetMapping
-    public List<OrderResponse> getAll() {
+        @GetMapping
+        public List<OrderResponse> getAll() {
 
-        return service.findAll()
-                .stream()
-                .map(
-                        mapper::toResponse
-                )
-                .toList();
-    }
+                return service.findAll()
+                                .stream()
+                                .map(
+                                                mapper::toResponse)
+                                .toList();
+        }
 
-    @GetMapping("/{id}")
-    public OrderResponse getById(
-            @PathVariable Long id
-    ) {
+        @GetMapping("/{id}")
+        public OrderResponse getById(
+                        @PathVariable Long id) {
 
-        return mapper.toResponse(
-                service.findById(id)
-        );
-    }
+                return mapper.toResponse(
+                                service.findById(id));
+        }
 
-    @DeleteMapping("/{id}")
-    public void delete(
-            @PathVariable Long id
-    ) {
+        @DeleteMapping("/{id}")
+        public void delete(
+                        @PathVariable Long id) {
 
-        service.delete(id);
-    }
+                service.delete(id);
+        }
+
+        @PutMapping("/{id}")
+        public OrderResponse update(
+                        @PathVariable Long id,
+                        @RequestBody OrderRequest request) {
+
+                return mapper.toResponse(
+                                service.update(
+                                                id,
+                                                request));
+        }
 }

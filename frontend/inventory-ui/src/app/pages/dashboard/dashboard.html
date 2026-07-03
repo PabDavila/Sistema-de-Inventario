@@ -20,6 +20,115 @@
 
 </div>
 
+<h3>Últimos Movimientos</h3>
+
+<div>
+
+  <table border="1">
+
+  <thead>
+
+    <tr>
+
+      <th>ID</th>
+      <th>Producto</th>
+      <th>Tipo</th>
+      <th>Cantidad</th>
+      <th>Fecha</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let movement of recentMovements">
+
+      <td>{{ movement.id }}</td>
+
+      <td>{{ movement.productName }}</td>
+
+      <td>{{ movement.type }}</td>
+
+      <td>{{ movement.quantity }}</td>
+
+      <td>{{ movement.movementDate }}</td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+</div>
+
+
+<h3>Últimos Pedidos</h3>
+
+<div>
+
+<table border="1">
+
+  <thead>
+
+    <tr>
+
+      <th>ID</th>
+
+      <th>Cliente</th>
+
+      <th>Estado</th>
+
+      <th>Observación</th>
+
+      <th>Fecha</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let order of recentOrders">
+
+      <td>
+
+        {{ order.id }}
+
+      </td>
+
+      <td>
+
+        {{ order.clientName }}
+
+      </td>
+
+      <td>
+
+        {{ order.status }}
+
+      </td>
+
+      <td>
+
+        {{ order.observation }}
+
+      </td>
+
+      <td>
+
+        {{ order.orderDate }}
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+</div>
+
 <hr>
 
 <button (click)="logout()">

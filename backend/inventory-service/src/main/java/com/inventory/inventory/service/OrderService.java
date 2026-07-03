@@ -78,4 +78,20 @@ public class OrderService {
                 orderRepository.delete(
                                 order);
         }
+
+        public Order update(
+                        Long id,
+                        OrderRequest request) {
+
+                Order order = findById(id);
+
+                order.setStatus(
+                                request.getStatus());
+
+                order.setObservation(
+                                request.getObservation());
+
+                return orderRepository.save(
+                                order);
+        }
 }

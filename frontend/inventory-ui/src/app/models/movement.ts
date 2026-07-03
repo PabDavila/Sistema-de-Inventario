@@ -12,5 +12,5 @@ export interface Movement {
 
   status?: string;
 
-  movementDate?: string;
+  movementDate: string;
 }
