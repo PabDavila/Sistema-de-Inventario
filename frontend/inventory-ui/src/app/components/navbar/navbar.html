@@ -4,37 +4,37 @@
     Dashboard
   </a>
 
-  <a *ngIf="isAdmin() || isOperator()" routerLink="/productos">
+  <a *ngIf="isAdmin() || isOperator()" routerLink="/productos" routerLinkActive="active">
 
     Productos
 
   </a>
 
-  <a *ngIf="isAdmin() || isOperator()" routerLink="/categorias">
+  <a *ngIf="isAdmin() || isOperator()" routerLink="/categorias" routerLinkActive="active">
 
     Categorías
 
   </a>
 
-  <a *ngIf="isAdmin() || isOperator() || isDelivery()" routerLink="/movimientos">
+  <a *ngIf="isAdmin() || isOperator() || isDelivery()" routerLink="/movimientos" routerLinkActive="active">
 
     Movimientos
 
   </a>
 
-  <a *ngIf="isAdmin() || isOperator()" routerLink="/pedidos">
+  <a *ngIf="isAdmin() || isOperator()" routerLink="/pedidos" routerLinkActive="active">
 
     Pedidos
 
   </a>
 
-  <a *ngIf="isAdmin() || isDelivery()" routerLink="/clientes">
+  <a *ngIf="isAdmin() || isDelivery()" routerLink="/clientes" routerLinkActive="active">
 
     Clientes
 
   </a>
 
-  <a *ngIf="role === 'ROLE_ADMIN'" routerLink="/usuarios">
+  <a *ngIf="role === 'ROLE_ADMIN'" routerLink="/usuarios" routerLinkActive="active">
 
     Usuarios
 

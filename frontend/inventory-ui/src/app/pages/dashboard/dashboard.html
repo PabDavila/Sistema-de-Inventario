@@ -6,19 +6,53 @@
 
 <div>
 
-  <p>
-    Productos: {{ totalProducts }}
-  </p>
+  <div class="dashboard-cards">
 
-  <p>
-    Categorías: {{ totalCategories }}
-  </p>
+    <div class="stat-card">
 
-  <p>
-    Movimientos: {{ totalMovements }}
-  </p>
+      <h3>Productos</h3>
+
+      <p>
+        {{ totalProducts }}
+      </p>
+
+    </div>
+
+    <div class="stat-card">
+
+      <h3>Categorías</h3>
+
+      <p>
+        {{ totalCategories }}
+      </p>
+
+    </div>
+
+    <div class="stat-card">
+
+      <h3>Movimientos</h3>
+
+      <p>
+        {{ totalMovements }}
+      </p>
+
+    </div>
+
+    <div class="stat-card">
+
+      <h3>Pedidos</h3>
+
+      <p>
+        {{ totalOrders }}
+      </p>
+
+    </div>
+
+  </div>
 
 </div>
+
+<hr>
 
 <h3>Últimos Movimientos</h3>
 
@@ -26,109 +60,110 @@
 
   <table border="1">
 
-  <thead>
+    <thead>
 
-    <tr>
+      <tr>
 
-      <th>ID</th>
-      <th>Producto</th>
-      <th>Tipo</th>
-      <th>Cantidad</th>
-      <th>Estado</th>
-      <th>Fecha</th>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Tipo</th>
+        <th>Cantidad</th>
+        <th>Estado</th>
+        <th>Fecha</th>
 
-    </tr>
+      </tr>
 
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
 
-    <tr *ngFor="let movement of recentMovements">
+      <tr *ngFor="let movement of recentMovements">
 
-      <td>{{ movement.id }}</td>
+        <td>{{ movement.id }}</td>
 
-      <td>{{ movement.productName }}</td>
+        <td>{{ movement.productName }}</td>
 
-      <td>{{ movement.type }}</td>
+        <td>{{ movement.type }}</td>
 
-      <td>{{ movement.quantity }}</td>
+        <td>{{ movement.quantity }}</td>
 
-      <td>{{ movement.status }}</td>
+        <td>{{ movement.status }}</td>
 
-      <td>{{ movement.movementDate }}</td>
+        <td>{{ movement.movementDate }}</td>
 
-    </tr>
+      </tr>
 
-  </tbody>
+    </tbody>
 
-</table>
+  </table>
 
 </div>
 
+<hr>
 
 <h3>Últimos Pedidos</h3>
 
 <div>
 
-<table border="1">
+  <table border="1">
 
-  <thead>
+    <thead>
 
-    <tr>
+      <tr>
 
-      <th>ID</th>
+        <th>ID</th>
 
-      <th>Cliente</th>
+        <th>Cliente</th>
 
-      <th>Estado</th>
+        <th>Estado</th>
 
-      <th>Observación</th>
+        <th>Observación</th>
 
-      <th>Fecha</th>
+        <th>Fecha</th>
 
-    </tr>
+      </tr>
 
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
 
-    <tr *ngFor="let order of recentOrders">
+      <tr *ngFor="let order of recentOrders">
 
-      <td>
+        <td>
 
-        {{ order.id }}
+          {{ order.id }}
 
-      </td>
+        </td>
 
-      <td>
+        <td>
 
-        {{ order.clientName }}
+          {{ order.clientName }}
 
-      </td>
+        </td>
 
-      <td>
+        <td>
 
-        {{ order.status }}
+          {{ order.status }}
 
-      </td>
+        </td>
 
-      <td>
+        <td>
 
-        {{ order.observation }}
+          {{ order.observation }}
 
-      </td>
+        </td>
 
-      <td>
+        <td>
 
-        {{ order.orderDate }}
+          {{ order.orderDate }}
 
-      </td>
+        </td>
 
-    </tr>
+      </tr>
 
-  </tbody>
+    </tbody>
 
-</table>
+  </table>
 
 </div>
 

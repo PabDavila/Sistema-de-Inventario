@@ -3,20 +3,20 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 import { ProductService }
-from '../../core/services/product';
+  from '../../core/services/product';
 
 import { CategoryService }
-from '../../core/services/category';
+  from '../../core/services/category';
 
 import { MovementService }
-from '../../core/services/movement';
+  from '../../core/services/movement';
 import { Movement } from '../../models/movement';
 
 import { OrderService }
-from '../../core/services/order';
+  from '../../core/services/order';
 
 import { Order }
-from '../../models/order';
+  from '../../models/order';
 
 import { CommonModule } from '@angular/common';
 
@@ -26,7 +26,7 @@ import {
 } from '@angular/router';
 
 import { AuthService }
-from '../../core/services/auth';
+  from '../../core/services/auth';
 
 
 
@@ -44,25 +44,27 @@ export class Dashboard implements OnInit {
 
   totalMovements = 0;
 
+  totalOrders = 0;
+
   recentMovements: Movement[] = [];
 
   recentOrders: Order[] = [];
 
   constructor(
 
-  private authService: AuthService,
+    private authService: AuthService,
 
-  private router: Router,
+    private router: Router,
 
-  private productService: ProductService,
+    private productService: ProductService,
 
-  private categoryService: CategoryService,
+    private categoryService: CategoryService,
 
-  private movementService: MovementService,
+    private movementService: MovementService,
 
-  private orderService: OrderService
+    private orderService: OrderService
 
-) {}
+  ) { }
 
   logout(): void {
 
@@ -75,71 +77,80 @@ export class Dashboard implements OnInit {
 
   ngOnInit(): void {
 
-  this.loadDashboard();
+    this.loadDashboard();
 
-  this.movementService
-  .getAll()
-  .subscribe(data => {
+    this.movementService
+      .getAll()
+      .subscribe(data => {
 
-    this.recentMovements = data
-      .sort((a, b) =>
-        new Date(b.movementDate).getTime() -
-        new Date(a.movementDate).getTime()
-      )
-      .slice(0, 5);
+        this.recentMovements = data
+          .sort((a, b) =>
+            new Date(b.movementDate).getTime() -
+            new Date(a.movementDate).getTime()
+          )
+          .slice(0, 5);
 
-  });
+      });
 
-  this.orderService
-  .getAll()
-  .subscribe(data => {
+    this.orderService
+      .getAll()
+      .subscribe(data => {
 
-    this.recentOrders = data
-      .sort((a, b) =>
-        new Date(
-          b.orderDate ?? ''
-        ).getTime()
-        -
-        new Date(
-          a.orderDate ?? ''
-        ).getTime()
-      )
-      .slice(0, 5);
+        this.recentOrders = data
+          .sort((a, b) =>
+            new Date(
+              b.orderDate ?? ''
+            ).getTime()
+            -
+            new Date(
+              a.orderDate ?? ''
+            ).getTime()
+          )
+          .slice(0, 5);
 
-  });
+      });
 
-}
+    this.orderService
+      .getAll()
+      .subscribe(data => {
 
-loadDashboard(): void {
+        this.totalOrders =
+          data.length;
 
-  this.productService
-    .getAll()
-    .subscribe(data => {
+      });
 
-      this.totalProducts =
-        data.length;
+  }
 
-    });
+  loadDashboard(): void {
 
-  this.categoryService
-    .getAll()
-    .subscribe(data => {
+    this.productService
+      .getAll()
+      .subscribe(data => {
 
-      this.totalCategories =
-        data.length;
+        this.totalProducts =
+          data.length;
 
-    });
+      });
 
-  this.movementService
-    .getAll()
-    .subscribe(data => {
+    this.categoryService
+      .getAll()
+      .subscribe(data => {
 
-      this.totalMovements =
-        data.length;
+        this.totalCategories =
+          data.length;
 
-    });
+      });
 
-}
+    this.movementService
+      .getAll()
+      .subscribe(data => {
+
+        this.totalMovements =
+          data.length;
+
+      });
+
+  }
 
 
 }
