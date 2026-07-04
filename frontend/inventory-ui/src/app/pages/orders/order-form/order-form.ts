@@ -204,7 +204,7 @@ export class OrderForm
         .subscribe(() => {
 
           this.router.navigate([
-            '/orders'
+            '/pedidos'
           ]);
         });
 
@@ -260,7 +260,7 @@ export class OrderForm
                 ) {
 
                   this.router.navigate([
-                    '/orders'
+                    '/pedidos'
                   ]);
                 }
               }

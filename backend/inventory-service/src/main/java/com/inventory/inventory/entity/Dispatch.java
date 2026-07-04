@@ -2,6 +2,9 @@ package com.inventory.inventory.entity;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,26 +12,26 @@ import java.time.LocalDateTime;
 public class Dispatch {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime dispatchDate =
-            LocalDateTime.now();
+    @NotNull
+    private LocalDateTime dispatchDate = LocalDateTime.now();
 
+    @NotBlank
     private String status;
 
+    @NotBlank
     private String deliveryAddress;
 
+    @NotNull
     private Long deliveryUserId;
 
+    @NotNull
     private Long operatorUserId;
 
     @OneToOne
-    @JoinColumn(
-            name = "order_id"
-    )
+    @JoinColumn(name = "order_id")
     private Order order;
 
     public Long getId() {
@@ -44,8 +47,7 @@ public class Dispatch {
     }
 
     public void setDispatchDate(
-            LocalDateTime dispatchDate
-    ) {
+            LocalDateTime dispatchDate) {
         this.dispatchDate = dispatchDate;
     }
 
@@ -54,8 +56,7 @@ public class Dispatch {
     }
 
     public void setStatus(
-            String status
-    ) {
+            String status) {
         this.status = status;
     }
 
@@ -64,8 +65,7 @@ public class Dispatch {
     }
 
     public void setDeliveryAddress(
-            String deliveryAddress
-    ) {
+            String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 
@@ -74,8 +74,7 @@ public class Dispatch {
     }
 
     public void setDeliveryUserId(
-            Long deliveryUserId
-    ) {
+            Long deliveryUserId) {
         this.deliveryUserId = deliveryUserId;
     }
 
@@ -84,8 +83,7 @@ public class Dispatch {
     }
 
     public void setOperatorUserId(
-            Long operatorUserId
-    ) {
+            Long operatorUserId) {
         this.operatorUserId = operatorUserId;
     }
 
@@ -94,8 +92,7 @@ public class Dispatch {
     }
 
     public void setOrder(
-            Order order
-    ) {
+            Order order) {
         this.order = order;
     }
 }

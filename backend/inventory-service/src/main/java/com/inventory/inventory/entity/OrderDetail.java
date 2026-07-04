@@ -1,5 +1,8 @@
 package com.inventory.inventory.entity;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,28 +10,26 @@ import jakarta.persistence.*;
 public class OrderDetail {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(
-            name = "order_id",
-            nullable = false
-    )
+    @JoinColumn(name = "order_id", nullable = false)
+    @NotNull
     private Order order;
 
     @ManyToOne
-    @JoinColumn(
-            name = "product_id",
-            nullable = false
-    )
+    @JoinColumn(name = "product_id", nullable = false)
+    @NotNull
     private Product product;
 
+    @NotNull
+    @Positive
     @Column(nullable = false)
     private Integer quantity;
 
+    @NotNull
+    @Positive
     @Column(nullable = false)
     private Double unitPrice;
 

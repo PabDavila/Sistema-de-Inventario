@@ -2,6 +2,9 @@ package com.inventory.inventory.entity;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,22 +12,19 @@ import java.time.LocalDateTime;
 public class Order {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime orderDate =
-            LocalDateTime.now();
+    private LocalDateTime orderDate = LocalDateTime.now();
 
+    @NotBlank
     private String status;
 
     private String observation;
 
     @ManyToOne
-    @JoinColumn(
-            name = "client_id"
-    )
+    @JoinColumn(name = "client_id")
+    @NotNull
     private Client client;
 
     public Long getId() {
@@ -43,8 +43,7 @@ public class Order {
     }
 
     public void setOrderDate(
-            LocalDateTime orderDate
-    ) {
+            LocalDateTime orderDate) {
 
         this.orderDate = orderDate;
     }
@@ -55,8 +54,7 @@ public class Order {
     }
 
     public void setStatus(
-            String status
-    ) {
+            String status) {
 
         this.status = status;
     }
@@ -67,8 +65,7 @@ public class Order {
     }
 
     public void setObservation(
-            String observation
-    ) {
+            String observation) {
 
         this.observation = observation;
     }
@@ -79,8 +76,7 @@ public class Order {
     }
 
     public void setClient(
-            Client client
-    ) {
+            Client client) {
 
         this.client = client;
     }

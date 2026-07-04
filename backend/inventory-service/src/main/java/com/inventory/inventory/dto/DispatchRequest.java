@@ -1,15 +1,23 @@
 package com.inventory.inventory.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class DispatchRequest {
 
+    @NotNull
     private Long orderId;
 
+    @NotBlank
     private String status;
 
+    @NotBlank
     private String deliveryAddress;
 
+    @NotNull
     private Long deliveryUserId;
 
+    @NotNull
     private Long operatorUserId;
 
     public Long getOrderId() {

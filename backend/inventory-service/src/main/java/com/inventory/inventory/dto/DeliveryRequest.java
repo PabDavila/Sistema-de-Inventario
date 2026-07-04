@@ -1,9 +1,14 @@
 package com.inventory.inventory.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class DeliveryRequest {
 
+    @NotNull
     private Long dispatchId;
 
+    @NotBlank
     private String finalStatus;
 
     private String observation;

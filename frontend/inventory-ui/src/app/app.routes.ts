@@ -216,7 +216,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'orders/:id',
+    path: 'pedidos/:id',
     component: OrderDetail,
     canActivate: [
       authGuard,
@@ -227,10 +227,17 @@ export const routes: Routes = [
       ])
     ]
   },
-
+  
   {
-    path: 'orders/edit/:id',
-    component: OrderForm
+    path: 'pedidos/editar/:id',
+    component: OrderForm,
+    canActivate: [
+      authGuard,
+      roleGuard([
+        'ROLE_ADMIN',
+        'ROLE_OPERATOR'
+      ])
+    ]
   },
 
   {

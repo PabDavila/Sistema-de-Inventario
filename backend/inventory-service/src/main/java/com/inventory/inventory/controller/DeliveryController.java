@@ -9,6 +9,8 @@ import com.inventory.inventory.mapper.DeliveryMapper;
 
 import com.inventory.inventory.service.DeliveryService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,8 @@ public class DeliveryController {
 
     @PostMapping
     public DeliveryResponse create(
-            @RequestBody
+        @Valid    
+        @RequestBody
             DeliveryRequest request
     ) {
 

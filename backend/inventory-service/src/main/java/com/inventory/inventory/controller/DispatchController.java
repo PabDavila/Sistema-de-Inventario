@@ -9,6 +9,8 @@ import com.inventory.inventory.mapper.DispatchMapper;
 
 import com.inventory.inventory.service.DispatchService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,8 @@ public class DispatchController {
 
         @PostMapping
         public DispatchResponse create(
-                        @RequestBody DispatchRequest request) {
+                @Valid        
+                @RequestBody DispatchRequest request) {
 
                 Dispatch dispatch = service.create(
                                 request);

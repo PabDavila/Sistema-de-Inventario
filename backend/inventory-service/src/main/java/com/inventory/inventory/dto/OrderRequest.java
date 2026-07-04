@@ -1,5 +1,6 @@
 package com.inventory.inventory.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class OrderRequest {
@@ -7,6 +8,7 @@ public class OrderRequest {
     @NotNull
     private Long clientId;
 
+    @NotBlank
     private String status;
 
     private String observation;
