@@ -12,6 +12,9 @@ services:
     ports:
       - "5432:5432"
 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   auth-service:
     build:
       context: ../auth-service
@@ -20,6 +23,9 @@ services:
 
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:postgresql://postgres:5432/inventorydb
+      DB_USER: postgres
+      DB_PASSWORD: postgres
 
     ports:
       - "8081:8081"
@@ -35,6 +41,9 @@ services:
 
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:postgresql://postgres:5432/inventorydb
+      DB_USER: postgres
+      DB_PASSWORD: postgres
 
     ports:
       - "8082:8082"
@@ -54,3 +63,6 @@ services:
     depends_on:
       - auth-service
       - inventory-service
+
+volumes:
+  postgres_data:
