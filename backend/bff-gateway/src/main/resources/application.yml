@@ -9,51 +9,52 @@ spring:
     gateway:
       routes:
         - id: auth-service
-          uri: http://localhost:8081
+          uri: http://auth-service:8081
           predicates:
             - Path=/auth/**
 
         - id: inventory-products
-          uri: http://localhost:8082
+          uri: http://inventory-service:8082
           predicates:
             - Path=/products/**
 
         - id: inventory-categories
-          uri: http://localhost:8082
+          uri: http://inventory-categories:8082
           predicates:
             - Path=/categories/**
 
         - id: inventory-movements
-          uri: http://localhost:8082
+          uri: http://inventory-movements:8082
           predicates:
             - Path=/movements/**
 
         - id: inventory-clients
-          uri: http://localhost:8082
+          uri: http://inventory-clients:8082
           predicates:
             - Path=/clients/**
 
         - id: auth-users
-          uri: http://localhost:8081
+          uri: http://auth-users:8081
           predicates:
             - Path=/users/**
 
         - id: inventory-orders
-          uri: http://localhost:8082
+          uri: http://inventory-orders:8082
           predicates:
             - Path=/orders/**
 
         - id: inventory-order-details
-          uri: http://localhost:8082
+          uri: http://inventory-order-details:8082
           predicates:
             - Path=/order-details/**
 
         - id: inventory-dispatches
-          uri: http://localhost:8082
+          uri: http://inventory-dispatches:8082
           predicates:
             - Path=/dispatches/**
 
         - id: inventory-deliveries
-          uri: http://localhost:8082
+          uri: http://inventory-deliveries:8082
           predicates:
             - Path=/deliveries/**
+
