@@ -12,7 +12,7 @@ import { Order } from '../../models/order';
 export class OrderService {
 
   private readonly API_URL =
-    'http://localhost:8080/orders';
+    '/api/orders';
 
   constructor(
     private http: HttpClient

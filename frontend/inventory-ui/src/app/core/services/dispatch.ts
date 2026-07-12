@@ -12,7 +12,7 @@ import { Dispatch } from '../../models/dispatch';
 export class DispatchService {
 
   private readonly API_URL =
-    'http://localhost:8080/dispatches';
+    '/api/dispatches';
 
   constructor(
     private http: HttpClient

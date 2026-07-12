@@ -50,6 +50,8 @@ public class JwtAuthenticationFilter
                 if (path.contains("/auth/login")
                                 || path.contains("/auth/register")
                                 || path.startsWith("/users")
+				|| path.startsWith("/products")
+				|| path.startsWith("/categories")
                                 || path.startsWith("/swagger-ui")
                                 || path.startsWith("/v3/api-docs")) {
 

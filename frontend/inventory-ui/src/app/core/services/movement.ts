@@ -14,7 +14,7 @@ import { Movement } from '../../models/movement';
 export class MovementService {
 
   private readonly API_URL =
-    'http://localhost:8080/movements';
+    '/api/movements';
 
   constructor(
     private http: HttpClient

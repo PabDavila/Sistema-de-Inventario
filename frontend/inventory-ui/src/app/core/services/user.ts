@@ -12,7 +12,7 @@ import { User } from '../../models/user';
 export class UserService {
 
   private readonly API_URL =
-    'http://localhost:8080/users';
+    '/api/users';
 
   constructor(
     private http: HttpClient

@@ -15,7 +15,7 @@ export class AuthService {
   private readonly ROLE_KEY = 'user_role';
 
   private readonly API_URL =
-    'http://localhost:8080/auth';
+    '/api/auth';
 
   constructor(
     private http: HttpClient

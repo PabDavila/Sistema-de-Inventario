@@ -12,7 +12,7 @@ import { Client } from '../../models/client';
 export class ClientService {
 
   private readonly API_URL =
-    'http://localhost:8080/clients';
+    '/api/clients';
 
   constructor(
     private http: HttpClient
