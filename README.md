@@ -264,3 +264,73 @@ Funcionalidades implementadas:
 * Persistencia validada.
 * Backup de base de datos.
 * Preparación para despliegue cloud.
+
+## Requisitos de la Máquina Virtual
+
+Para ejecutar correctamente el sistema se requiere una máquina virtual con Ubuntu Server 24.04 LTS (o una distribución Linux compatible) y los siguientes componentes instalados:
+
+### Software requerido
+
+* OpenJDK 21
+* Maven
+* Docker
+* Docker Compose
+* Nginx
+* Git
+* Node.js
+* npm
+* Angular CLI
+
+### Tecnologías utilizadas
+
+#### Backend
+
+* Java 21
+* Spring Boot
+* Spring Security
+* Spring Cloud Gateway
+* JWT Authentication
+* Maven
+
+#### Base de Datos
+
+* PostgreSQL 17 (ejecutado mediante Docker)
+
+#### Frontend
+
+* Angular
+* TypeScript
+* HTML5
+* CSS3
+
+#### Infraestructura y Despliegue
+
+* Docker
+* Docker Compose
+* Nginx
+* Azure Virtual Machine
+* GitHub
+
+### Componentes desplegados
+
+| Componente               | Puerto |
+| ------------------------ | ------ |
+| Frontend Angular (Nginx) | 80     |
+| BFF Gateway              | 8080   |
+| Auth Service             | 8081   |
+| Inventory Service        | 8082   |
+| PostgreSQL               | 5432   |
+
+### Arquitectura
+
+El sistema se encuentra desplegado bajo una arquitectura de microservicios compuesta por:
+
+* Auth Service: gestión de usuarios, autenticación y autorización mediante JWT.
+* Inventory Service: gestión de productos, categorías, movimientos, pedidos, clientes, despachos y entregas.
+* BFF Gateway: centralización de rutas y comunicación entre frontend y microservicios.
+* PostgreSQL: almacenamiento persistente de la información.
+* Frontend Angular: interfaz de usuario accesible desde navegador web.
+* Nginx: servidor web y reverse proxy para publicación del sistema.
+
+Todos los servicios se encuentran integrados mediante Docker Compose y desplegados en una máquina virtual Azure.
+
